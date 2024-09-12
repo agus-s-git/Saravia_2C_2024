@@ -36,95 +36,134 @@
 #include "freertos/task.h"
 /*==================[macros and definitions]=================================*/
 #define CONFIG_BLINK_PERIOD_LED 1000
-#define CONFIG_BLINK_PERIOD_MEDIR 500
+#define DELAY_MOSTRAR 500
+#define DELAY_MEDIR 1000
+#define DELAY_TECLAS 100
+
+
 uint16_t DISTANCIA;
+bool ON;
+bool HOLD;
 
 /*==================[internal data definition]===============================*/
 TaskHandle_t led_task_handle = NULL;
 TaskHandle_t medir_task_handle = NULL;
-
+TaskHandle_t teclas_task_handle = NULL;
 
 /*==================[internal functions declaration]=========================*/
+//Listo
+static void manejarLEDs(){
+	
+	
+	//while (true)
+	//{
+	
+		
 
+		if (DISTANCIA<10)
+		{
+			LedsOffAll();
+			printf("LEDs OFF\n");
+			
+		}
+		else if (DISTANCIA >= 10 && DISTANCIA <= 20)
+		{
+			LedOn(LED_1);
+			printf("LED 1 ON\n");
+			
+		}
+		else if (DISTANCIA >= 20 && DISTANCIA <= 30)
+		{
+			printf("LED 1 Y LED 2 ON\n");
+			LedOn(LED_1);
+			LedOn(LED_2);
+		}
+		else if (DISTANCIA >= 30)
+		{
+			printf("LED 1, LED 2 Y LED 3 ON\n");
+			LedOn(LED_1);
+			LedOn(LED_2);
+			LedOn(LED_3);
+		}
+	
+		vTaskDelay(CONFIG_BLINK_PERIOD_LED / portTICK_PERIOD_MS);
+
+	//}
+}
+//Listo
 static void tareaMedir(void *pvParameter){
-	while (1)
-	{
-		DISTANCIA = HcSr04ReadDistanceInCentimeters();
-		vTaskDelay(CONFIG_BLINK_PERIOD_MEDIR / portTICK_PERIOD_MS);
-	}
-	
-}
-//static void tareaLCD(void){	
-//}
-static void tareaLEDs(void *pvParameter){
-	while (1)
-	{
-	void manejarLEDs();
-	vTaskDelay (CONFIG_BLINK_PERIOD_LED / portTICK_PERIOD_MS);
-	}
-	
-}
-
-//static void tareaTeclas(void){
-//}
-/*
-void run_stop_medicion(void){
-	tecla = SwitchesRead();
-	switch (tecla)
-	{
-	case SWITCH_1:
-
-		LcdItsE0803Write(DISTANCIA);
-		break;
-	case SWITCH_2:
-		medida_hold = LcdItsE0803Read();
-		LcdItsE0803Write(medida_hold);
-	default:
-		break;
-	}
-	
-}
-*/
-
-void manejarLEDs(void){
 	while (true)
 	{
-	
-	if (DISTANCIA<10)
-	{
-		printf("LEDs OFF\n");
-		LedsOffAll();
-	}
-	else if (DISTANCIA > 10 && DISTANCIA < 20)
-	{
-		printf("LED 1 ON\n");
-		LedOn(LED_1);
-	}
-	else if (DISTANCIA > 20 && DISTANCIA < 30)
-	{
-		printf("LED 1 Y LED 2 ON\n");
-		LedOn(LED_1);
-		LedOn(LED_2);
-	}
-	else if (DISTANCIA > 30)
-	{
-		printf("LED 1, LED 2 Y LED 3 ON\n");
-		LedOn(LED_1);
-		LedOn(LED_2);
-		LedOn(LED_3);
+		DISTANCIA = HcSr04ReadDistanceInCentimeters();
+		vTaskDelay(DELAY_MEDIR / portTICK_PERIOD_MS);
+		printf("Distancia: %d\n",DISTANCIA);
 	}
 	
+}
+
+static void tareaTeclas(void *pvParameter){
+	
+	while (true)
+	{
+		int8_t tecla = SwitchesRead();
+		switch (tecla)
+		{
+			case SWITCH_1:
+				ON = !ON;
+				printf("Tecla 1\n");
+			break;
+
+			case SWITCH_2:
+				HOLD = !HOLD;
+				printf("Tecla 2\n");
+			break;
+		}
+	
+		vTaskDelay(DELAY_TECLAS / portTICK_PERIOD_MS);
 	}
 }
+
+
+static void tareaMostrarDistancia(void *pvParameter){
+	
+	
+
+	while(true){
+		if (ON == true){
+
+			manejarLEDs();
+			
+
+			if(HOLD == false)
+			{
+				LcdItsE0803Write(DISTANCIA);
+			}
+		}
+		if (ON == false)
+		{
+			LcdItsE0803Off();
+			LedsOffAll();
+		}
+
+		vTaskDelay(DELAY_MOSTRAR / portTICK_PERIOD_MS);
+	}
+}
+
+
+
 
 
 
 /*==================[external functions definition]==========================*/
 void app_main(void){
 	LedsInit();
-	HcSr04Deinit();
+	HcSr04Init(GPIO_3, GPIO_2);
+	SwitchesInit();
+	LcdItsE0803Init();
 	
+
 	xTaskCreate(&tareaMedir, "Medir", 2048, NULL, 5, &medir_task_handle);
-	xTaskCreate(&tareaLEDs, "LEDs", 2048, NULL, 3, &led_task_handle);
+	xTaskCreate(&tareaMostrarDistancia, "Mostrar distancia", 2048, NULL, 3, &led_task_handle);
+	xTaskCreate(&tareaTeclas, "Teclas", 2048, NULL, 5, &teclas_task_handle);
 }
 /*==================[end of file]============================================*/
