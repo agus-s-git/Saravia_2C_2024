@@ -34,19 +34,20 @@
 #include "switch.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "timer_mcu.h"
 /*==================[macros and definitions]=================================*/
 #define CONFIG_BLINK_PERIOD_LED 1000
 #define DELAY_MOSTRAR 500
 #define DELAY_MEDIR 1000
 #define DELAY_TECLAS 100
-
+#define CONFIG_PERIOD_SWITCH 1000000
 
 uint16_t DISTANCIA;
 bool ON;
 bool HOLD;
 
 /*==================[internal data definition]===============================*/
-TaskHandle_t led_task_handle = NULL;
+TaskHandle_t mostrar_task_handle = NULL;
 TaskHandle_t medir_task_handle = NULL;
 TaskHandle_t teclas_task_handle = NULL;
 
@@ -54,12 +55,6 @@ TaskHandle_t teclas_task_handle = NULL;
 //Listo
 static void manejarLEDs(){
 	
-	
-	//while (true)
-	//{
-	
-		
-
 		if (DISTANCIA<10)
 		{
 			LedsOffAll();
@@ -86,9 +81,7 @@ static void manejarLEDs(){
 			LedOn(LED_3);
 		}
 	
-		vTaskDelay(CONFIG_BLINK_PERIOD_LED / portTICK_PERIOD_MS);
 
-	//}
 }
 //Listo
 static void tareaMedir(void *pvParameter){
@@ -97,37 +90,27 @@ static void tareaMedir(void *pvParameter){
 		DISTANCIA = HcSr04ReadDistanceInCentimeters();
 		vTaskDelay(DELAY_MEDIR / portTICK_PERIOD_MS);
 		printf("Distancia: %d\n",DISTANCIA);
+
+		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
 	}
 	
 }
-
-static void tareaTeclas(void *pvParameter){
-	
-	while (true)
-	{
-		int8_t tecla = SwitchesRead();
-		switch (tecla)
-		{
-			case SWITCH_1:
-				ON = !ON;
-				printf("Tecla 1\n");
-			break;
-
-			case SWITCH_2:
-				HOLD = !HOLD;
-				printf("Tecla 2\n");
-			break;
-		}
-	
-		vTaskDelay(DELAY_TECLAS / portTICK_PERIOD_MS);
-	}
+void FuncTimerTeclas(void* param){
+    vTaskNotifyGiveFromISR(medir_task_handle, pdFALSE);    /* Envía una notificación a la tarea asociada al LED_1 */
 }
-
+void FuncTimerMedir(void* param){
+    vTaskNotifyGiveFromISR(mostrar_task_handle, pdFALSE);    /* Envía una notificación a la tarea asociada al LED_1 */
+}
+void tecla1(){
+	ON = !ON;
+}
+void tecla2(){
+	HOLD = !HOLD;
+}
 
 static void tareaMostrarDistancia(void *pvParameter){
 	
 	
-
 	while(true){
 		if (ON == true){
 
@@ -145,14 +128,9 @@ static void tareaMostrarDistancia(void *pvParameter){
 			LedsOffAll();
 		}
 
-		vTaskDelay(DELAY_MOSTRAR / portTICK_PERIOD_MS);
+		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
 	}
 }
-
-
-
-
-
 
 /*==================[external functions definition]==========================*/
 void app_main(void){
@@ -161,13 +139,32 @@ void app_main(void){
 	SwitchesInit();
 	LcdItsE0803Init();
 	
+	SwitchActivInt(SWITCH_1, *tecla1, NULL);
+	SwitchActivInt(SWITCH_2, *tecla2, NULL);
 
 	xTaskCreate(&tareaMedir, "Medir", 2048, NULL, 5, &medir_task_handle);
-	xTaskCreate(&tareaMostrarDistancia, "Mostrar distancia", 2048, NULL, 3, &led_task_handle);
-	xTaskCreate(&tareaTeclas, "Teclas", 2048, NULL, 5, &teclas_task_handle);
+	xTaskCreate(&tareaMostrarDistancia, "Mostrar distancia", 2048, NULL, 3, &mostrar_task_handle);
+	//xTaskCreate(&tareaTeclas, "Teclas", 2048, NULL, 5, &teclas_task_handle);
 
-	 
+	 /* Inicialización de timers */
+    timer_config_t timer_tecla = {
+        .timer = TIMER_A,
+        .period = CONFIG_PERIOD_SWITCH,
+        .func_p = FuncTimerTeclas,
+        .param_p = NULL
+    };
+	TimerInit(&timer_tecla);
+
+	timer_config_t timer_medir = {
+        .timer = TIMER_B,
+        .period = CONFIG_PERIOD_SWITCH,
+        .func_p = FuncTimerMedir,
+        .param_p = NULL
+    };
+	TimerInit(&timer_medir);
 
 
+	TimerStart(timer_tecla.timer);
+	TimerStart(timer_medir.timer);
 }
 /*==================[end of file]============================================*/
