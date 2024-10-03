@@ -76,24 +76,24 @@ static void manejarLEDs(){
 		if (DISTANCIA<10)
 		{
 			LedsOffAll();
-			//printf("LEDs OFF\n");
+			
 			
 		}
 		else if (DISTANCIA >= 10 && DISTANCIA <= 20)
 		{
 			LedOn(LED_1);
-			//printf("LED 1 ON\n");
+			
 			
 		}
 		else if (DISTANCIA >= 20 && DISTANCIA <= 30)
 		{
-			//printf("LED 1 Y LED 2 ON\n");
+			
 			LedOn(LED_1);
 			LedOn(LED_2);
 		}
 		else if (DISTANCIA >= 30)
 		{
-			//printf("LED 1, LED 2 Y LED 3 ON\n");
+			
 			LedOn(LED_1);
 			LedOn(LED_2);
 			LedOn(LED_3);
@@ -107,7 +107,7 @@ static void tareaMedir(void *pvParameter){
 	{
 		DISTANCIA = HcSr04ReadDistanceInCentimeters();
 		vTaskDelay(DELAY_MEDIR / portTICK_PERIOD_MS);
-		//printf("Distancia: %d\n",DISTANCIA);
+		
 		
 		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
 	}
@@ -204,7 +204,6 @@ void app_main(void){
 	
 	xTaskCreate(&tareaMedir, "Medir", 2048, NULL, 5, &medir_task_handle);
 	xTaskCreate(&tareaMostrarDistancia, "Mostrar distancia", 2048, NULL, 3, &mostrar_task_handle);
-	//xTaskCreate(&tareaTeclas, "Teclas", 2048, NULL, 5, &teclas_task_handle);
 	xTaskCreate(&tareaUart, "UART", 2048, &mi_uart, 5, &uart_task_handle);
 
 
