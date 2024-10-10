@@ -1,16 +1,24 @@
-/*! @mainpage Template
+/*! @mainpage Guía 2 - Ejercicio 1
  *
- * @section genDesc General Description
+ * @section Descripción
  *
- * This section describes how the program works.
+ * El programa mide la distancia usando un sensor ultrasónico HC-SR04, 
+ * controla LEDs basados en la distancia medida y muestra el resultado 
+ * en una pantalla LCD. También permite manejar el sistema mediante botones.
  *
- * <a href="https://drive.google.com/...">Operation Example</a>
+ * 
  *
  * @section hardConn Hardware Connection
  *
- * |    Peripheral  |   ESP32   	|
- * |:--------------:|:--------------|
- * | 	PIN_X	 	| 	GPIO_X		|
+ * | Peripheral  | ESP32        |
+ * |-------------|--------------|
+ * |  HC-SR04 Trig | GPIO_3     |
+ * |  HC-SR04 Echo | GPIO_2     |
+ * |  LED 1      | GPIO_20      |
+ * |  LED 2      | GPIO_21      |
+ * |  LED 3      | GPIO_22      |
+ * |  Switch 1   | GPIO_4      |
+ * |  Switch 2   | GPIO_15      |
  *
  *
  * @section changelog Changelog
@@ -19,7 +27,7 @@
  * |:----------:|:-----------------------------------------------|
  * | 12/09/2023 | Document creation		                         |
  *
- * @author Albano Peñalva (albano.penalva@uner.edu.ar)
+ * @author Agustín Saravia (agustin.saravia@ingenieria.uner.edu.ar)
  *
  */
 
@@ -35,30 +43,50 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 /*==================[macros and definitions]=================================*/
+/**
+ * @def CONFIG_BLINK_PERIOD_LED
+ * @brief Periodo de parpadeo de los LEDs en milisegundos 
+*/ 
 #define CONFIG_BLINK_PERIOD_LED 1000
+/**
+ * @def DELAY_MOSTRAR
+ * @brief Delay para mostrar la distancia en la pantalla LCD  
+ */
+
 #define DELAY_MOSTRAR 500
+/**
+ * @def DELAY_MEDIR
+ * @brief Intervalo de tiempo para medir la distancia  
+ */
 #define DELAY_MEDIR 1000
+/**
+ * @def DELAY_TECLAS
+ * @brief Intervalo de tiempo para leer las teclas  
+ */
 #define DELAY_TECLAS 100
 
-
+/*! @brief Variable para almacenar la distancia medida en centímetros */
 uint16_t DISTANCIA;
+/*! @brief Variable que indica si el sistema está encendido */
 bool ON;
+/*! @brief Variable que indica si el sistema está en modo "HOLD" */
 bool HOLD;
 
+
 /*==================[internal data definition]===============================*/
+/*! @brief Manejador de la tarea de control de LEDs */
 TaskHandle_t led_task_handle = NULL;
+/*! @brief Manejador de la tarea de medición de distancia */
 TaskHandle_t medir_task_handle = NULL;
+/*! @brief Manejador de la tarea de teclas */
 TaskHandle_t teclas_task_handle = NULL;
 
 /*==================[internal functions declaration]=========================*/
-//Listo
-static void manejarLEDs(){
-	
-	
-	//while (true)
-	//{
-	
-		
+/**
+ * @fn manejarLEDs()
+ * @brief Función que controla el encendido de los LEDs según la distancia medida.
+ */
+static void manejarLEDs(){	
 
 		if (DISTANCIA<10)
 		{
@@ -87,10 +115,12 @@ static void manejarLEDs(){
 		}
 	
 		vTaskDelay(CONFIG_BLINK_PERIOD_LED / portTICK_PERIOD_MS);
-
-	//}
 }
-//Listo
+/**
+ * @fn static void tareaMedir(void *pvParameter)
+ * @brief Tarea que mide la distancia utilizando el sensor HC-SR04.
+ * @param pvParameter Parámetro de FreeRTOS
+ */
 static void tareaMedir(void *pvParameter){
 	while (true)
 	{
@@ -100,7 +130,11 @@ static void tareaMedir(void *pvParameter){
 	}
 	
 }
-
+/**
+ * @fn static void tareaTeclas(void *pvParameter)
+ * @brief Tarea para manejar el estado de las teclas.
+ * @param pvParameter Parámetro de FreeRTOS
+ */
 static void tareaTeclas(void *pvParameter){
 	
 	while (true)
@@ -123,11 +157,13 @@ static void tareaTeclas(void *pvParameter){
 	}
 }
 
-
+/**
+ * @fn static void tareaMostrarDistancia(void *pvParameter)
+ * @brief Tarea para mostrar la distancia medida en la pantalla LCD.
+ * @param pvParameter Parámetro de FreeRTOS
+ */
 static void tareaMostrarDistancia(void *pvParameter){
 	
-	
-
 	while(true){
 		if (ON == true){
 
@@ -148,11 +184,6 @@ static void tareaMostrarDistancia(void *pvParameter){
 		vTaskDelay(DELAY_MOSTRAR / portTICK_PERIOD_MS);
 	}
 }
-
-
-
-
-
 
 /*==================[external functions definition]==========================*/
 void app_main(void){
