@@ -1,25 +1,37 @@
-/*! @mainpage Template
+/*! @mainpage Guía 2 - Ejercicio 3
  *
- * @section genDesc General Description
+ * @section Descripción
  *
- * This section describes how the program works.
+ * El programa modifica la actividad 2 agregando
+ * un puerto serie. Se envían datos de las mediciones
+ * para que puedan ser observados en un terminal en 
+ * la PC. Además, con las teclas "O" y "H" se enciende
+ * y se mantiene la medición respectivamente.
  *
- * <a href="https://drive.google.com/...">Operation Example</a>
+ * 
  *
  * @section hardConn Hardware Connection
  *
- * |    Peripheral  |   ESP32   	|
- * |:--------------:|:--------------|
- * | 	PIN_X	 	| 	GPIO_X		|
+ * | Peripheral  | ESP32        |
+ * |-------------|--------------|
+ * |  HC-SR04 Trig | GPIO_3     |
+ * |  HC-SR04 Echo | GPIO_2     |
+ * |  LED 1      | GPIO_20      |
+ * |  LED 2      | GPIO_21      |
+ * |  LED 3      | GPIO_22      |
+ * |  Switch 1   | GPIO_4      |
+ * |  Switch 2   | GPIO_15      |
+ * |  CH1        | GPIO_1      |
+ * |  CH0        | GPIO_0      |
  *
  *
  * @section changelog Changelog
  *
  * |   Date	    | Description                                    |
  * |:----------:|:-----------------------------------------------|
- * | 12/09/2023 | Document creation		                         |
+ * | 10/10/2023 | Document creation		                         |
  *
- * @author Albano Peñalva (albano.penalva@uner.edu.ar)
+ * @author Agustín Saravia (agustin.saravia@ingenieria.uner.edu.ar)
  *
  */
 
@@ -34,16 +46,48 @@
 #include "uart_mcu.h"
 #include "analog_io_mcu.h"
 /*==================[macros and definitions]=================================*/
-uint16_t v_analog;
+/**
+ * @def CONFIG_BLINK_PERIOD_CAD
+ * @brief Período del temporizador para la tarea CAD en milisegundos.
+ */
 #define CONFIG_BLINK_PERIOD_CAD 20000
+
+/**
+ * @def CONFIG_BLINK_PERIOD_ECG
+ * @brief Período del temporizador para la tarea ECG en milisegundos.
+ */
 #define CONFIG_BLINK_PERIOD_ECG 40000
+
+/**
+ * @def BUFFER_SIZE
+ * @brief Tamaño del buffer que almacena los valores del ECG.
+ */
 #define BUFFER_SIZE 231
+
+/**
+ * @brief Contador que controla el avance en el buffer de la señal ECG.
+ */
 int contador_ecg = 0;
 
+/**
+ * @brief Variable para almacenar el valor leído desde el canal analógico.
+ */
+uint16_t v_analog;
+
 /*==================[internal data definition]===============================*/
+/**
+ * @brief Manejador de la tarea CAD.
+ */
 TaskHandle_t cad_task_handle = NULL;
+
+/**
+ * @brief Manejador de la tarea ECG.
+ */
 TaskHandle_t ecg_task_handle = NULL;
 
+/**
+ * @brief Buffer que contiene la señal ECG para enviar como salida analógica.
+ */
 const char ecg[BUFFER_SIZE] = {
     76, 77, 78, 77, 79, 86, 81, 76, 84, 93, 85, 80,
     89, 95, 89, 85, 93, 98, 94, 88, 98, 105, 96, 91,
@@ -65,17 +109,28 @@ const char ecg[BUFFER_SIZE] = {
 };
 
 /*==================[internal functions declaration]=========================*/
-//void AnalogInputReadSingle(adc_ch_t CH1, uint16_t v_analog*);
-//void UartSendString(uart_mcu_port_t UART_PC, const char *v_analog);
-//void AnalogOutputWrite(uint8_t value);
 
+/**
+ * @fn FuncTimerA(void* param)
+ * @brief Función asociada al temporizador A, activa la tarea CAD.
+ * @param param Parametro no utilizado
+ */
 void FuncTimerA(void* param){
     vTaskNotifyGiveFromISR(cad_task_handle, pdFALSE);    
 }
+/**
+ * @fn FuncTimerB(void* param)
+ * @brief Función asociada al temporizador A, activa la tarea ECG.
+ * @param param Parametro no utilizado
+ */
 void FuncTimerB(void* param){
     vTaskNotifyGiveFromISR(ecg_task_handle, pdFALSE);    
 }
-
+/**
+ * @fn static void tareaCAD(void *pvParameter)
+ * @brief Tarea que lee un dato analógico y luego lo envía por la UART.
+ * @param pvParameter Parámetro de FreeRTOS
+ */
 static void tareaCAD(void *pvParameter){
     while (true)
     {
@@ -85,6 +140,11 @@ static void tareaCAD(void *pvParameter){
         UartSendString(UART_PC, "\r\n");
     }
 }
+/**
+ * @fn static void tareaECG(void *pvParameter)
+ * @brief Tarea que envía como señal analógica una señal de ECG digital
+ * @param pvParameter Parámetro de FreeRTOS
+ */
 static void tareaECG(void *pvParameter){
     while (true)
     {
