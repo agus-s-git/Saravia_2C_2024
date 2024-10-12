@@ -56,7 +56,7 @@
 #define DELAY_MOSTRAR 500
 /**
  * @def DELAY_MEDIR
- * @brief Intervalo de tiempo para medir la distancia  
+ * @brief Intervalo de tiempo para medir la distancia en milisegundos 
  */
 #define DELAY_MEDIR 1000
 /**

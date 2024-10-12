@@ -1,12 +1,9 @@
-/*! @mainpage Guía 2 - Ejercicio 3
+/*! @mainpage Guía 2 - Ejercicio 4
  *
  * @section Descripción
  *
- * El programa modifica la actividad 2 agregando
- * un puerto serie. Se envían datos de las mediciones
- * para que puedan ser observados en un terminal en 
- * la PC. Además, con las teclas "O" y "H" se enciende
- * y se mantiene la medición respectivamente.
+ * El programa mide wl voltaje usando el conversor ADC de la placa,
+ * envía esto por la UART y simula una señal ECG usando un conversor DAC.
  *
  * 
  *
@@ -14,15 +11,8 @@
  *
  * | Peripheral  | ESP32        |
  * |-------------|--------------|
- * |  HC-SR04 Trig | GPIO_3     |
- * |  HC-SR04 Echo | GPIO_2     |
- * |  LED 1      | GPIO_20      |
- * |  LED 2      | GPIO_21      |
- * |  LED 3      | GPIO_22      |
- * |  Switch 1   | GPIO_4      |
- * |  Switch 2   | GPIO_15      |
- * |  CH1        | GPIO_1      |
- * |  CH0        | GPIO_0      |
+ * |  ADC_CH1    |  GPIO_1      |
+ * | DAC_OUT_CH0 |  GPIO_0      |
  *
  *
  * @section changelog Changelog
