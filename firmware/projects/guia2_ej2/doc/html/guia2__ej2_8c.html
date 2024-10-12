@@ -148,6 +148,12 @@ defines</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Funciones</h2></td></tr>
+<tr class="memitem:a1b005ac9371c0cdcb503b6001d30112f" id="r_a1b005ac9371c0cdcb503b6001d30112f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1b005ac9371c0cdcb503b6001d30112f">manejarLEDs</a> ()</td></tr>
+<tr class="memdesc:a1b005ac9371c0cdcb503b6001d30112f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función que controla el encendido de los LEDs según la distancia medida.  <br /></td></tr>
+<tr class="separator:a1b005ac9371c0cdcb503b6001d30112f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50430825f1c4fea3e112d86092983952" id="r_a50430825f1c4fea3e112d86092983952"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a50430825f1c4fea3e112d86092983952">tareaMedir</a> (void *pvParameter)</td></tr>
+<tr class="memdesc:a50430825f1c4fea3e112d86092983952"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tarea que mide la distancia utilizando el sensor HC-SR04.  <br /></td></tr>
+<tr class="separator:a50430825f1c4fea3e112d86092983952"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a005b11d6a0a6e351b7623dc180e2d573" id="r_a005b11d6a0a6e351b7623dc180e2d573"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a005b11d6a0a6e351b7623dc180e2d573">FuncTimerTeclas</a> (void *param)</td></tr>
 <tr class="memdesc:a005b11d6a0a6e351b7623dc180e2d573"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función asociada al temporizador para activar la lectura de teclas.  <br /></td></tr>
 <tr class="separator:a005b11d6a0a6e351b7623dc180e2d573"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -159,6 +165,9 @@ Funciones</h2></td></tr>
 <tr class="separator:aa53a7c4d4d24211034c272a441508472"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae92bb92db45eb870b65732b439b50278" id="r_ae92bb92db45eb870b65732b439b50278"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae92bb92db45eb870b65732b439b50278">tecla2</a> ()</td></tr>
 <tr class="separator:ae92bb92db45eb870b65732b439b50278"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9e3e8ea746271ebce7af26920826b01" id="r_ae9e3e8ea746271ebce7af26920826b01"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae9e3e8ea746271ebce7af26920826b01">tareaMostrarDistancia</a> (void *pvParameter)</td></tr>
+<tr class="memdesc:ae9e3e8ea746271ebce7af26920826b01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tarea para mostrar la distancia en el LCD y controlar el encendido de los LEDs.  <br /></td></tr>
+<tr class="separator:ae9e3e8ea746271ebce7af26920826b01"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a630544a7f0a2cc40d8a7fefab7e2fe70" id="r_a630544a7f0a2cc40d8a7fefab7e2fe70"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a630544a7f0a2cc40d8a7fefab7e2fe70">app_main</a> (void)</td></tr>
 <tr class="separator:a630544a7f0a2cc40d8a7fefab7e2fe70"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -239,6 +248,8 @@ Variables</h2></td></tr>
 
 <p class="definition">Definición en la línea <a class="el" href="guia2__ej2_8c_source.html#l00063">63</a> del archivo <a class="el" href="guia2__ej2_8c_source.html">guia2_ej2.c</a>.</p>
 
+<p class="reference">Referenciado por <a class="el" href="guia2__ej2_8c_source.html#l00133">tareaMedir()</a>.</p>
+
 </div>
 </div>
 <a id="a53c940c6fd5a4d0d7b69f02bbcdb4441" name="a53c940c6fd5a4d0d7b69f02bbcdb4441"></a>
@@ -297,7 +308,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definición en la línea <a class="el" href="guia2__ej2_8c_source.html#l00204">204</a> del archivo <a class="el" href="guia2__ej2_8c_source.html">guia2_ej2.c</a>.</p>
 
-<p class="reference">Hace referencia a <a class="el" href="guia2__ej2_8c_source.html#l00073">CONFIG_PERIOD_SWITCH</a>, <a class="el" href="guia2__ej2_8c_source.html#l00157">FuncTimerMedir()</a>, <a class="el" href="guia2__ej2_8c_source.html#l00149">FuncTimerTeclas()</a>, <a class="el" href="gpio__mcu_8h_source.html#l00054">GPIO_2</a>, <a class="el" href="gpio__mcu_8h_source.html#l00055">GPIO_3</a>, <a class="el" href="hc__sr04_8c_source.html#l00034">HcSr04Init()</a>, <a class="el" href="lcditse0803_8c_source.html#l00037">LcdItsE0803Init()</a>, <a class="el" href="led_8c_source.html#l00031">LedsInit()</a>, <a class="el" href="guia2__ej2_8c_source.html#l00088">medir_task_handle</a>, <a class="el" href="ili9341_8c_source.html#l00019">NULL</a>, <a class="el" href="switch_8h_source.html#l00032">SWITCH_1</a>, <a class="el" href="switch_8h_source.html#l00033">SWITCH_2</a>, <a class="el" href="switch_8c_source.html#l00047">SwitchActivInt()</a>, <a class="el" href="switch_8c_source.html#l00029">SwitchesInit()</a>, <a class="el" href="guia2__ej2_8c_source.html#l00164">tecla1()</a>, <a class="el" href="guia2__ej2_8c_source.html#l00171">tecla2()</a>, <a class="el" href="timer__mcu_8h_source.html#l00040">timer_config_t::timer</a>, <a class="el" href="timer__mcu_8h_source.html#l00032">TIMER_A</a>, <a class="el" href="timer__mcu_8h_source.html#l00033">TIMER_B</a>, <a class="el" href="timer__mcu_8c_source.html#l00067">TimerInit()</a> y <a class="el" href="timer__mcu_8c_source.html#l00116">TimerStart()</a>.</p>
+<p class="reference">Hace referencia a <a class="el" href="guia2__ej2_8c_source.html#l00073">CONFIG_PERIOD_SWITCH</a>, <a class="el" href="guia2__ej2_8c_source.html#l00157">FuncTimerMedir()</a>, <a class="el" href="guia2__ej2_8c_source.html#l00149">FuncTimerTeclas()</a>, <a class="el" href="gpio__mcu_8h_source.html#l00054">GPIO_2</a>, <a class="el" href="gpio__mcu_8h_source.html#l00055">GPIO_3</a>, <a class="el" href="hc__sr04_8c_source.html#l00034">HcSr04Init()</a>, <a class="el" href="lcditse0803_8c_source.html#l00037">LcdItsE0803Init()</a>, <a class="el" href="led_8c_source.html#l00031">LedsInit()</a>, <a class="el" href="guia2__ej2_8c_source.html#l00088">medir_task_handle</a>, <a class="el" href="ili9341_8c_source.html#l00019">NULL</a>, <a class="el" href="switch_8h_source.html#l00032">SWITCH_1</a>, <a class="el" href="switch_8h_source.html#l00033">SWITCH_2</a>, <a class="el" href="switch_8c_source.html#l00047">SwitchActivInt()</a>, <a class="el" href="switch_8c_source.html#l00029">SwitchesInit()</a>, <a class="el" href="guia2__ej2_8c_source.html#l00133">tareaMedir()</a>, <a class="el" href="guia2__ej2_8c_source.html#l00179">tareaMostrarDistancia()</a>, <a class="el" href="guia2__ej2_8c_source.html#l00164">tecla1()</a>, <a class="el" href="guia2__ej2_8c_source.html#l00171">tecla2()</a>, <a class="el" href="timer__mcu_8h_source.html#l00040">timer_config_t::timer</a>, <a class="el" href="timer__mcu_8h_source.html#l00032">TIMER_A</a>, <a class="el" href="timer__mcu_8h_source.html#l00033">TIMER_B</a>, <a class="el" href="timer__mcu_8c_source.html#l00067">TimerInit()</a> y <a class="el" href="timer__mcu_8c_source.html#l00116">TimerStart()</a>.</p>
 
 </div>
 </div>
@@ -356,6 +367,117 @@ Variables</h2></td></tr>
 <p class="definition">Definición en la línea <a class="el" href="guia2__ej2_8c_source.html#l00149">149</a> del archivo <a class="el" href="guia2__ej2_8c_source.html">guia2_ej2.c</a>.</p>
 
 <p class="reference">Hace referencia a <a class="el" href="guia2__ej2_8c_source.html#l00088">medir_task_handle</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="guia2__ej2_8c_source.html#l00204">app_main()</a>.</p>
+
+</div>
+</div>
+<a id="a1b005ac9371c0cdcb503b6001d30112f" name="a1b005ac9371c0cdcb503b6001d30112f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b005ac9371c0cdcb503b6001d30112f">&#9670;&#160;</a></span>manejarLEDs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void manejarLEDs </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Función que controla el encendido de los LEDs según la distancia medida. </p>
+
+<p class="definition">Definición en la línea <a class="el" href="guia2__ej2_8c_source.html#l00097">97</a> del archivo <a class="el" href="guia2__ej2_8c_source.html">guia2_ej2.c</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="guia2__ej2_8c_source.html#l00076">DISTANCIA</a>, <a class="el" href="led_8h_source.html#l00034">LED_1</a>, <a class="el" href="led_8h_source.html#l00033">LED_2</a>, <a class="el" href="led_8h_source.html#l00032">LED_3</a>, <a class="el" href="led_8c_source.html#l00046">LedOn()</a> y <a class="el" href="led_8c_source.html#l00105">LedsOffAll()</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="guia2__ej2_8c_source.html#l00179">tareaMostrarDistancia()</a>.</p>
+
+</div>
+</div>
+<a id="a50430825f1c4fea3e112d86092983952" name="a50430825f1c4fea3e112d86092983952"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50430825f1c4fea3e112d86092983952">&#9670;&#160;</a></span>tareaMedir()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void tareaMedir </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>pvParameter</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Tarea que mide la distancia utilizando el sensor HC-SR04. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pvParameter</td><td>Parámetro de FreeRTOS </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definición en la línea <a class="el" href="guia2__ej2_8c_source.html#l00133">133</a> del archivo <a class="el" href="guia2__ej2_8c_source.html">guia2_ej2.c</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="guia2__ej2_8c_source.html#l00063">DELAY_MEDIR</a>, <a class="el" href="guia2__ej2_8c_source.html#l00076">DISTANCIA</a> y <a class="el" href="hc__sr04_8c_source.html#l00045">HcSr04ReadDistanceInCentimeters()</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="guia2__ej2_8c_source.html#l00204">app_main()</a>.</p>
+
+</div>
+</div>
+<a id="ae9e3e8ea746271ebce7af26920826b01" name="ae9e3e8ea746271ebce7af26920826b01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9e3e8ea746271ebce7af26920826b01">&#9670;&#160;</a></span>tareaMostrarDistancia()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void tareaMostrarDistancia </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>pvParameter</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Tarea para mostrar la distancia en el LCD y controlar el encendido de los LEDs. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pvParameter</td><td>Parámetro no utilizado. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definición en la línea <a class="el" href="guia2__ej2_8c_source.html#l00179">179</a> del archivo <a class="el" href="guia2__ej2_8c_source.html">guia2_ej2.c</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="guia2__ej2_8c_source.html#l00076">DISTANCIA</a>, <a class="el" href="guia2__ej2_8c_source.html#l00080">HOLD</a>, <a class="el" href="lcditse0803_8c_source.html#l00087">LcdItsE0803Off()</a>, <a class="el" href="lcditse0803_8c_source.html#l00054">LcdItsE0803Write()</a>, <a class="el" href="led_8c_source.html#l00105">LedsOffAll()</a>, <a class="el" href="guia2__ej2_8c_source.html#l00097">manejarLEDs()</a> y <a class="el" href="guia2__ej2_8c_source.html#l00078">ON</a>.</p>
 
 <p class="reference">Referenciado por <a class="el" href="guia2__ej2_8c_source.html#l00204">app_main()</a>.</p>
 
@@ -427,6 +549,8 @@ Variables</h2></td></tr>
 
 <p class="definition">Definición en la línea <a class="el" href="guia2__ej2_8c_source.html#l00076">76</a> del archivo <a class="el" href="guia2__ej2_8c_source.html">guia2_ej2.c</a>.</p>
 
+<p class="reference">Referenciado por <a class="el" href="guia2__ej2_8c_source.html#l00097">manejarLEDs()</a>, <a class="el" href="guia2__ej2_8c_source.html#l00133">tareaMedir()</a> y <a class="el" href="guia2__ej2_8c_source.html#l00179">tareaMostrarDistancia()</a>.</p>
+
 </div>
 </div>
 <a id="afc247b5bf8f971ed6ea450caf1c76e37" name="afc247b5bf8f971ed6ea450caf1c76e37"></a>
@@ -445,7 +569,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definición en la línea <a class="el" href="guia2__ej2_8c_source.html#l00080">80</a> del archivo <a class="el" href="guia2__ej2_8c_source.html">guia2_ej2.c</a>.</p>
 
-<p class="reference">Referenciado por <a class="el" href="guia2__ej2_8c_source.html#l00171">tecla2()</a>.</p>
+<p class="reference">Referenciado por <a class="el" href="guia2__ej2_8c_source.html#l00179">tareaMostrarDistancia()</a> y <a class="el" href="guia2__ej2_8c_source.html#l00171">tecla2()</a>.</p>
 
 </div>
 </div>
@@ -503,7 +627,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definición en la línea <a class="el" href="guia2__ej2_8c_source.html#l00078">78</a> del archivo <a class="el" href="guia2__ej2_8c_source.html">guia2_ej2.c</a>.</p>
 
-<p class="reference">Referenciado por <a class="el" href="guia2__ej2_8c_source.html#l00164">tecla1()</a>.</p>
+<p class="reference">Referenciado por <a class="el" href="guia2__ej2_8c_source.html#l00179">tareaMostrarDistancia()</a> y <a class="el" href="guia2__ej2_8c_source.html#l00164">tecla1()</a>.</p>
 
 </div>
 </div>

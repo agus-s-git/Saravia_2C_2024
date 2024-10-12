@@ -143,6 +143,12 @@ Funciones</h2></td></tr>
 <tr class="memitem:a5088c3325764095ca222dc78c328f466" id="r_a5088c3325764095ca222dc78c328f466"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5088c3325764095ca222dc78c328f466">FuncTimerB</a> (void *param)</td></tr>
 <tr class="memdesc:a5088c3325764095ca222dc78c328f466"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función asociada al temporizador A, activa la tarea ECG.  <br /></td></tr>
 <tr class="separator:a5088c3325764095ca222dc78c328f466"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba9ad1614461d2452dd143dadff0535d" id="r_aba9ad1614461d2452dd143dadff0535d"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aba9ad1614461d2452dd143dadff0535d">tareaCAD</a> (void *pvParameter)</td></tr>
+<tr class="memdesc:aba9ad1614461d2452dd143dadff0535d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tarea que lee un dato analógico y luego lo envía por la UART.  <br /></td></tr>
+<tr class="separator:aba9ad1614461d2452dd143dadff0535d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a830dfb909d5f509b10ca8a83dab76079" id="r_a830dfb909d5f509b10ca8a83dab76079"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a830dfb909d5f509b10ca8a83dab76079">tareaECG</a> (void *pvParameter)</td></tr>
+<tr class="memdesc:a830dfb909d5f509b10ca8a83dab76079"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tarea que envía como señal analógica una señal de ECG digital.  <br /></td></tr>
+<tr class="separator:a830dfb909d5f509b10ca8a83dab76079"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a630544a7f0a2cc40d8a7fefab7e2fe70" id="r_a630544a7f0a2cc40d8a7fefab7e2fe70"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a630544a7f0a2cc40d8a7fefab7e2fe70">app_main</a> (void)</td></tr>
 <tr class="separator:a630544a7f0a2cc40d8a7fefab7e2fe70"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -180,6 +186,8 @@ Variables</h2></td></tr>
 <p>Tamaño del buffer que almacena los valores del ECG. </p>
 
 <p class="definition">Definición en la línea <a class="el" href="guia2__ej4ecg_8c_source.html#l00055">55</a> del archivo <a class="el" href="guia2__ej4ecg_8c_source.html">guia2_ej4ecg.c</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="guia2__ej4ecg_8c_source.html#l00138">tareaECG()</a>.</p>
 
 </div>
 </div>
@@ -241,7 +249,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definición en la línea <a class="el" href="guia2__ej4ecg_8c_source.html#l00156">156</a> del archivo <a class="el" href="guia2__ej4ecg_8c_source.html">guia2_ej4ecg.c</a>.</p>
 
-<p class="reference">Hace referencia a <a class="el" href="analog__io__mcu_8h_source.html#l00038">ADC_SINGLE</a>, <a class="el" href="analog__io__mcu_8c_source.html#l00045">AnalogInputInit()</a>, <a class="el" href="analog__io__mcu_8c_source.html#l00120">AnalogOutputInit()</a>, <a class="el" href="guia2__ej4ecg_8c_source.html#l00071">cad_task_handle</a>, <a class="el" href="analog__io__mcu_8h_source.html#l00032">CH1</a>, <a class="el" href="guia2__ej4ecg_8c_source.html#l00043">CONFIG_BLINK_PERIOD_CAD</a>, <a class="el" href="guia2__ej4ecg_8c_source.html#l00049">CONFIG_BLINK_PERIOD_ECG</a>, <a class="el" href="guia2__ej4ecg_8c_source.html#l00076">ecg_task_handle</a>, <a class="el" href="guia2__ej4ecg_8c_source.html#l00108">FuncTimerA()</a>, <a class="el" href="guia2__ej4ecg_8c_source.html#l00116">FuncTimerB()</a>, <a class="el" href="analog__io__mcu_8h_source.html#l00049">analog_input_config_t::input</a>, <a class="el" href="ili9341_8c_source.html#l00019">NULL</a>, <a class="el" href="uart__mcu_8h_source.html#l00039">serial_config_t::port</a>, <a class="el" href="timer__mcu_8h_source.html#l00040">timer_config_t::timer</a>, <a class="el" href="timer__mcu_8h_source.html#l00032">TIMER_A</a>, <a class="el" href="timer__mcu_8h_source.html#l00033">TIMER_B</a>, <a class="el" href="timer__mcu_8c_source.html#l00067">TimerInit()</a>, <a class="el" href="timer__mcu_8c_source.html#l00116">TimerStart()</a>, <a class="el" href="uart__mcu_8h_source.html#l00032">UART_PC</a> y <a class="el" href="uart__mcu_8c_source.html#l00107">UartInit()</a>.</p>
+<p class="reference">Hace referencia a <a class="el" href="analog__io__mcu_8h_source.html#l00038">ADC_SINGLE</a>, <a class="el" href="analog__io__mcu_8c_source.html#l00045">AnalogInputInit()</a>, <a class="el" href="analog__io__mcu_8c_source.html#l00120">AnalogOutputInit()</a>, <a class="el" href="guia2__ej4ecg_8c_source.html#l00071">cad_task_handle</a>, <a class="el" href="analog__io__mcu_8h_source.html#l00032">CH1</a>, <a class="el" href="guia2__ej4ecg_8c_source.html#l00043">CONFIG_BLINK_PERIOD_CAD</a>, <a class="el" href="guia2__ej4ecg_8c_source.html#l00049">CONFIG_BLINK_PERIOD_ECG</a>, <a class="el" href="guia2__ej4ecg_8c_source.html#l00076">ecg_task_handle</a>, <a class="el" href="guia2__ej4ecg_8c_source.html#l00108">FuncTimerA()</a>, <a class="el" href="guia2__ej4ecg_8c_source.html#l00116">FuncTimerB()</a>, <a class="el" href="analog__io__mcu_8h_source.html#l00049">analog_input_config_t::input</a>, <a class="el" href="ili9341_8c_source.html#l00019">NULL</a>, <a class="el" href="uart__mcu_8h_source.html#l00039">serial_config_t::port</a>, <a class="el" href="guia2__ej4ecg_8c_source.html#l00124">tareaCAD()</a>, <a class="el" href="guia2__ej4ecg_8c_source.html#l00138">tareaECG()</a>, <a class="el" href="timer__mcu_8h_source.html#l00040">timer_config_t::timer</a>, <a class="el" href="timer__mcu_8h_source.html#l00032">TIMER_A</a>, <a class="el" href="timer__mcu_8h_source.html#l00033">TIMER_B</a>, <a class="el" href="timer__mcu_8c_source.html#l00067">TimerInit()</a>, <a class="el" href="timer__mcu_8c_source.html#l00116">TimerStart()</a>, <a class="el" href="uart__mcu_8h_source.html#l00032">UART_PC</a> y <a class="el" href="uart__mcu_8c_source.html#l00107">UartInit()</a>.</p>
 
 </div>
 </div>
@@ -307,6 +315,84 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="aba9ad1614461d2452dd143dadff0535d" name="aba9ad1614461d2452dd143dadff0535d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba9ad1614461d2452dd143dadff0535d">&#9670;&#160;</a></span>tareaCAD()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void tareaCAD </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>pvParameter</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Tarea que lee un dato analógico y luego lo envía por la UART. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pvParameter</td><td>Parámetro de FreeRTOS </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definición en la línea <a class="el" href="guia2__ej4ecg_8c_source.html#l00124">124</a> del archivo <a class="el" href="guia2__ej4ecg_8c_source.html">guia2_ej4ecg.c</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="analog__io__mcu_8c_source.html#l00130">AnalogInputReadSingle()</a>, <a class="el" href="analog__io__mcu_8h_source.html#l00032">CH1</a>, <a class="el" href="uart__mcu_8h_source.html#l00032">UART_PC</a>, <a class="el" href="uart__mcu_8c_source.html#l00222">UartItoa()</a>, <a class="el" href="uart__mcu_8c_source.html#l00193">UartSendString()</a> y <a class="el" href="guia2__ej4ecg_8c_source.html#l00065">v_analog</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="guia2__ej4ecg_8c_source.html#l00156">app_main()</a>.</p>
+
+</div>
+</div>
+<a id="a830dfb909d5f509b10ca8a83dab76079" name="a830dfb909d5f509b10ca8a83dab76079"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a830dfb909d5f509b10ca8a83dab76079">&#9670;&#160;</a></span>tareaECG()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void tareaECG </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>pvParameter</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Tarea que envía como señal analógica una señal de ECG digital. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pvParameter</td><td>Parámetro de FreeRTOS </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definición en la línea <a class="el" href="guia2__ej4ecg_8c_source.html#l00138">138</a> del archivo <a class="el" href="guia2__ej4ecg_8c_source.html">guia2_ej4ecg.c</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="analog__io__mcu_8c_source.html#l00159">AnalogOutputWrite()</a>, <a class="el" href="guia2__ej4ecg_8c_source.html#l00055">BUFFER_SIZE</a>, <a class="el" href="guia2__ej4ecg_8c_source.html#l00060">contador_ecg</a> y <a class="el" href="guia2__ej4ecg_8c_source.html#l00081">ecg</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="guia2__ej4ecg_8c_source.html#l00156">app_main()</a>.</p>
+
+</div>
+</div>
 <h2 class="groupheader">Documentación de variables</h2>
 <a id="af5ef51060c34ddff4c174ef1d60166e7" name="af5ef51060c34ddff4c174ef1d60166e7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af5ef51060c34ddff4c174ef1d60166e7">&#9670;&#160;</a></span>cad_task_handle</h2>
@@ -343,6 +429,8 @@ Variables</h2></td></tr>
 <p>Contador que controla el avance en el buffer de la señal ECG. </p>
 
 <p class="definition">Definición en la línea <a class="el" href="guia2__ej4ecg_8c_source.html#l00060">60</a> del archivo <a class="el" href="guia2__ej4ecg_8c_source.html">guia2_ej4ecg.c</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="guia2__ej4ecg_8c_source.html#l00138">tareaECG()</a>.</p>
 
 </div>
 </div>
@@ -381,6 +469,8 @@ Variables</h2></td></tr>
 
 <p class="definition">Definición en la línea <a class="el" href="guia2__ej4ecg_8c_source.html#l00081">81</a> del archivo <a class="el" href="guia2__ej4ecg_8c_source.html">guia2_ej4ecg.c</a>.</p>
 
+<p class="reference">Referenciado por <a class="el" href="guia2__ej4ecg_8c_source.html#l00138">tareaECG()</a>.</p>
+
 </div>
 </div>
 <a id="a541609bbf5e34a3412d049d0579e9068" name="a541609bbf5e34a3412d049d0579e9068"></a>
@@ -418,6 +508,8 @@ Variables</h2></td></tr>
 <p>Variable para almacenar el valor leído desde el canal analógico. </p>
 
 <p class="definition">Definición en la línea <a class="el" href="guia2__ej4ecg_8c_source.html#l00065">65</a> del archivo <a class="el" href="guia2__ej4ecg_8c_source.html">guia2_ej4ecg.c</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="guia2__ej4ecg_8c_source.html#l00124">tareaCAD()</a>.</p>
 
 </div>
 </div>

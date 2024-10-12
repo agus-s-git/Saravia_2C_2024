@@ -106,7 +106,8 @@ $(function(){initNavTree('_c_make_files_2_check_type_size_2_t_i_m_e___t___s_i_z_
 <div class="header">
   <div class="summary">
 <a href="#define-members">defines</a> &#124;
-<a href="#func-members">Funciones</a>  </div>
+<a href="#func-members">Funciones</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">Referencia del archivo TIME_T_SIZE.c</div></div>
 </div><!--header-->
 <div class="contents">
@@ -125,6 +126,11 @@ defines</h2></td></tr>
 Funciones</h2></td></tr>
 <tr class="memitem:a0ddf1224851353fc92bfbff6f499fa97" id="r_a0ddf1224851353fc92bfbff6f499fa97"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0ddf1224851353fc92bfbff6f499fa97">main</a> (int argc, char *argv[])</td></tr>
 <tr class="separator:a0ddf1224851353fc92bfbff6f499fa97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a0355ddcca1b74f883f20cc208db8790b" id="r_a0355ddcca1b74f883f20cc208db8790b"><td class="memItemLeft" align="right" valign="top">static char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0355ddcca1b74f883f20cc208db8790b">info_size</a> []</td></tr>
+<tr class="separator:a0355ddcca1b74f883f20cc208db8790b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Documentación de «define»</h2>
 <a id="a70ed59adcb4159ac551058053e649640" name="a70ed59adcb4159ac551058053e649640"></a>
@@ -164,6 +170,45 @@ Funciones</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definición en la línea <a class="el" href="_c_make_files_2_check_type_size_2_t_i_m_e___t___s_i_z_e_8c_source.html#l00043">43</a> del archivo <a class="el" href="_c_make_files_2_check_type_size_2_t_i_m_e___t___s_i_z_e_8c_source.html">TIME_T_SIZE.c</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="bootloader_2_c_make_files_2_check_type_size_2_t_i_m_e___t___s_i_z_e_8c_source.html#l00028">info_size</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Documentación de variables</h2>
+<a id="a0355ddcca1b74f883f20cc208db8790b" name="a0355ddcca1b74f883f20cc208db8790b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0355ddcca1b74f883f20cc208db8790b">&#9670;&#160;</a></span>info_size</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">char info_size[]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Valor inicial:</b><div class="fragment"><div class="line">=  {<span class="charliteral">&#39;I&#39;</span>, <span class="charliteral">&#39;N&#39;</span>, <span class="charliteral">&#39;F&#39;</span>, <span class="charliteral">&#39;O&#39;</span>, <span class="charliteral">&#39;:&#39;</span>, <span class="charliteral">&#39;s&#39;</span>,<span class="charliteral">&#39;i&#39;</span>,<span class="charliteral">&#39;z&#39;</span>,<span class="charliteral">&#39;e&#39;</span>,<span class="charliteral">&#39;[&#39;</span>,</div>
+<div class="line">  (<span class="charliteral">&#39;0&#39;</span> + ((<a class="code hl_define" href="bootloader_2_c_make_files_2_check_type_size_2_t_i_m_e___t___s_i_z_e_8c.html#a70ed59adcb4159ac551058053e649640">SIZE</a> / 10000)%10)),</div>
+<div class="line">  (<span class="charliteral">&#39;0&#39;</span> + ((<a class="code hl_define" href="bootloader_2_c_make_files_2_check_type_size_2_t_i_m_e___t___s_i_z_e_8c.html#a70ed59adcb4159ac551058053e649640">SIZE</a> / 1000)%10)),</div>
+<div class="line">  (<span class="charliteral">&#39;0&#39;</span> + ((<a class="code hl_define" href="bootloader_2_c_make_files_2_check_type_size_2_t_i_m_e___t___s_i_z_e_8c.html#a70ed59adcb4159ac551058053e649640">SIZE</a> / 100)%10)),</div>
+<div class="line">  (<span class="charliteral">&#39;0&#39;</span> + ((<a class="code hl_define" href="bootloader_2_c_make_files_2_check_type_size_2_t_i_m_e___t___s_i_z_e_8c.html#a70ed59adcb4159ac551058053e649640">SIZE</a> / 10)%10)),</div>
+<div class="line">  (<span class="charliteral">&#39;0&#39;</span> +  (<a class="code hl_define" href="bootloader_2_c_make_files_2_check_type_size_2_t_i_m_e___t___s_i_z_e_8c.html#a70ed59adcb4159ac551058053e649640">SIZE</a>    % 10)),</div>
+<div class="line">  <span class="charliteral">&#39;]&#39;</span>,</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">  <span class="charliteral">&#39;\0&#39;</span>}</div>
+<div class="ttc" id="abootloader_2_c_make_files_2_check_type_size_2_t_i_m_e___t___s_i_z_e_8c_html_a70ed59adcb4159ac551058053e649640"><div class="ttname"><a href="bootloader_2_c_make_files_2_check_type_size_2_t_i_m_e___t___s_i_z_e_8c.html#a70ed59adcb4159ac551058053e649640">SIZE</a></div><div class="ttdeci">#define SIZE</div><div class="ttdef"><b>Definition</b> <a href="bootloader_2_c_make_files_2_check_type_size_2_t_i_m_e___t___s_i_z_e_8c_source.html#l00027">TIME_T_SIZE.c:27</a></div></div>
+</div><!-- fragment -->
+<p class="definition">Definición en la línea <a class="el" href="_c_make_files_2_check_type_size_2_t_i_m_e___t___s_i_z_e_8c_source.html#l00028">28</a> del archivo <a class="el" href="_c_make_files_2_check_type_size_2_t_i_m_e___t___s_i_z_e_8c_source.html">TIME_T_SIZE.c</a>.</p>
 
 </div>
 </div>

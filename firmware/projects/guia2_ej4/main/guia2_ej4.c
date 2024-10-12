@@ -1,25 +1,27 @@
-/*! @mainpage Template
+/*! @mainpage Guía 2 - Ejercicio 4
  *
- * @section genDesc General Description
+ * @section Descripción
  *
- * This section describes how the program works.
+ * El programa mide wl voltaje usando el conversor ADC de la placa,
+ * envía esto por la UART y simula una señal ECG usando un conversor DAC.
  *
- * <a href="https://drive.google.com/...">Operation Example</a>
+ * 
  *
  * @section hardConn Hardware Connection
  *
- * |    Peripheral  |   ESP32   	|
- * |:--------------:|:--------------|
- * | 	PIN_X	 	| 	GPIO_X		|
+ * | Peripheral  | ESP32        |
+ * |-------------|--------------|
+ * |  ADC_CH1    |  GPIO_1      |
+ * | DAC_OUT_CH0 |  GPIO_0      |
  *
  *
  * @section changelog Changelog
  *
  * |   Date	    | Description                                    |
  * |:----------:|:-----------------------------------------------|
- * | 12/09/2023 | Document creation		                         |
+ * | 10/10/2023 | Document creation		                         |
  *
- * @author Albano Peñalva (albano.penalva@uner.edu.ar)
+ * @author Agustín Saravia (agustin.saravia@ingenieria.uner.edu.ar)
  *
  */
 
@@ -34,20 +36,38 @@
 #include "uart_mcu.h"
 #include "analog_io_mcu.h"
 /*==================[macros and definitions]=================================*/
-uint16_t v_analog;
+/**
+ * @def CONFIG_BLINK_PERIOD_CAD
+ * @brief Período del temporizador para la tarea CAD en milisegundos.
+ */
 #define CONFIG_BLINK_PERIOD_CAD 20000
 
+/**
+ * @brief Variable para almacenar el valor leído desde el canal analógico.
+ */
+uint16_t v_analog;
 
 /*==================[internal data definition]===============================*/
+/**
+ * @brief Manejador de la tarea CAD.
+ */
 TaskHandle_t cad_task_handle = NULL;
 
 /*==================[internal functions declaration]=========================*/
-//void AnalogInputReadSingle(adc_ch_t CH1, uint16_t v_analog*);
-//void UartSendString(uart_mcu_port_t UART_PC, const char *v_analog);
 
+/**
+ * @fn FuncTimerA(void* param)
+ * @brief Función asociada al temporizador A, activa la tarea CAD.
+ * @param param Parametro no utilizado
+ */
 void FuncTimerA(void* param){
     vTaskNotifyGiveFromISR(cad_task_handle, pdFALSE);    
 }
+/**
+ * @fn static void tareaCAD(void *pvParameter)
+ * @brief Tarea que lee un dato analógico y luego lo envía por la UART.
+ * @param pvParameter Parámetro de FreeRTOS
+ */
 static void tareaCAD(void *pvParameter){
     while (true)
     {
