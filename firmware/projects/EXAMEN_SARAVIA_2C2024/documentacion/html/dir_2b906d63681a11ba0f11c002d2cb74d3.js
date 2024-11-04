@@ -1,0 +1,4 @@
+var dir_2b906d63681a11ba0f11c002d2cb74d3 =
+[
+    [ "CMakeCCompilerId.c", "projects_2_e_x_a_m_e_n___s_a_r_a_v_i_a__2_c2024_2build_2bootloader_2_c_make_files_23_824_80_2_co01d3ea07ce3c38fa9dba547e14d0a4af.html", "projects_2_e_x_a_m_e_n___s_a_r_a_v_i_a__2_c2024_2build_2bootloader_2_c_make_files_23_824_80_2_co01d3ea07ce3c38fa9dba547e14d0a4af" ]
+];
