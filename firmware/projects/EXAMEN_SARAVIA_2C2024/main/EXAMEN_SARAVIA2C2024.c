@@ -229,7 +229,7 @@ static void tareaCAD(void *pvParameter){
        
     }
 }
-
+//.
 /**
  * @fn void sumaEjes()
  * @brief Función que convierte los valores analogicos de los ejes y los suma
