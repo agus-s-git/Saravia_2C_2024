@@ -1,28 +1,41 @@
-/*! @mainpage Template
+/*! @mainpage EXAMEN
  *
- * @section genDesc General Description
+ * @section Descripción
  *
- * This section describes how the program works.
+ *El programa mide la distancia con un sensor HC-SR04 y activa
+ o desactiva LEDs de la placa y una buzzer externo dependiendo de
+ la distancia medida. Además, envia los datos por UART a un modulo
+ bluetooth indicando si existe peligro o precaucion por algun vehiculo
+ e informa si hubo una caida mediante las mediciones de un acelerometro
+ cuyos valores son convertidos en los respectivos conversore ADC de la placa.
  *
- * <a href="https://drive.google.com/...">Operation Example</a>
+ * 
  *
  * @section hardConn Hardware Connection
  *
- * |    Peripheral  |   ESP32   	|
- * |:--------------:|:--------------|
- * | 	PIN_X	 	| 	GPIO_X		|
+ * |   Peripheral  | ESP32        |
+ * |---------------|--------------|
+ * |  HC-SR04 Trig |   GPIO_3     |
+ * |  HC-SR04 Echo |   GPIO_2     |
+ * |  LED 1        |  GPIO_10     |
+ * |  LED 2        |  GPIO_11     |
+ * |  LED 3        |  GPIO_5      |
+ * |   BUZZER      |  GPIO_20     |
+ * |   ADC_x       |    CH0       |
+ * |   ADC_y       |    CH1       |
+ * |   ADC_z       |    CH2       | 
+ *
  *
  *
  * @section changelog Changelog
  *
  * |   Date	    | Description                                    |
  * |:----------:|:-----------------------------------------------|
- * | 12/09/2023 | Document creation		                         |
+ * | 04/11/2024 | Document creation		                         |
  *
- * @author Albano Peñalva (albano.penalva@uner.edu.ar)
+ * @author Agustín Saravia (agustin.saravia@ingenieria.uner.edu.ar)
  *
  */
-
 /*==================[inclusions]=============================================*/
 #include <stdio.h>
 #include <stdint.h>
@@ -276,7 +289,7 @@ void app_main(void){
 	xTaskCreate(&tareaDistancia, "Distancia y anexos", 2048, NULL, 5, &distancia_task_handle);
 	xTaskCreate(&tareaUART, "UART", 2048, NULL, 5, &uart_task_handle);
 	xTaskCreate(tareaCAD, "CAD", 2048, NULL, 5, &cad_task_handle);
-
+	//Configuracion de los timers
 	timer_config_t timer_distancia = {
         .timer = TIMER_A,
         .period = CONFIG_PERIOD_A,
@@ -285,7 +298,7 @@ void app_main(void){
     };
 	TimerInit(&timer_distancia);
 
-	 timer_config_t timer_CAD = {
+	timer_config_t timer_CAD = {
         .timer = TIMER_B,
         .period = CONFIG_BLINK_PERIOD_CAD,
         .func_p = FuncTimerB,
@@ -293,19 +306,19 @@ void app_main(void){
     };
     TimerInit(&timer_CAD);
     TimerStart(timer_CAD.timer);
-
+	//Configuracion del conversor del eje x
 	analog_input_config_t convAD_x = {
 		.input = CH0,
 		.mode = ADC_SINGLE,
 	};
     AnalogInputInit(&convAD_x);
-
+	//Configuracion del conversor del eje y
 	analog_input_config_t convAD_y = {
 		.input = CH1,
 		.mode = ADC_SINGLE,
 	};
     AnalogInputInit(&convAD_y);
-
+	//Configuracion del conversor del eje z
 	analog_input_config_t convAD_z = {
 		.input = CH2,
 		.mode = ADC_SINGLE,
