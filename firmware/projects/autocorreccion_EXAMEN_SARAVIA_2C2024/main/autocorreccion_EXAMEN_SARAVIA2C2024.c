@@ -35,6 +35,23 @@
  *
  * @author Agustín Saravia (agustin.saravia@ingenieria.uner.edu.ar)
  *
+ * -En la inicialización de TIMERs, los tiempos debían estar en microsegundos en vez de milisegundos.
+-Falta inicialización puerto serie
+-Falta inicialización de GPIO para buzzer
+-Bien inicialización AD
+-Bien inicialización Tareas
+-Los leds se encienden pero nunca se apagan, es innecesario el delay en manejarLeds.
+-La alarma sonora no está bien resuelta.
+-Bien la lectura del acelerómetro,no así el pasaje de mV a Gs.
+-Bien la documentación, estilo, identado, etc.
+-Bien el uso de Repositorios.
+ 
+a corregir:
+-En la inicialización de TIMERs, los tiempos debían estar en microsegundos en vez de milisegundos. +
+-Falta inicialización puerto serie -
+-Falta inicialización de GPIO para buzzer -
+-Los leds se encienden pero nunca se apagan, es innecesario el delay en manejarLeds. -
+-La alarma sonora no está bien resuelta.
  */
 /*==================[inclusions]=============================================*/
 #include <stdio.h>
@@ -84,9 +101,10 @@ uint16_t DISTANCIA;
 #define CONFIG_PERIOD_A 1000000
 /**
  * @def CONFIG_BLINK_PERIOD_CAD
- * @brief Período del temporizador para la tarea CAD en milisegundos.
+ * @brief Período del temporizador para la tarea CAD en MICROSEGUNDOS.
  */
-#define CONFIG_BLINK_PERIOD_CAD 10
+#define CONFIG_BLINK_PERIOD_CAD 10000
+
 uint16_t v_analog_x;
 uint16_t v_analog_y;
 uint16_t v_analog_z;
@@ -134,17 +152,23 @@ static void tareaMedir(void *pvParameter){
  */
 static void manejarLEDs(){	
 
+
+		LedsOffAll();
+
 		if (DISTANCIA>500)
 		{
 			HAY_PELIGRO = false;
 			HAY_PRECAUCION = false;
 			LedOn(LED_VERDE);
+			LedOff(LED_AMARILLO);
+			LedOff(LED_ROJO);
 			
 		}
 		else if (DISTANCIA >= 300 && DISTANCIA <= 500)
 		{
 			HAY_PRECAUCION = true;
 			HAY_PELIGRO = false;
+			LedOff(LED_ROJO);
 			LedOn(LED_VERDE);
 			LedOn(LED_AMARILLO);
 			
@@ -157,8 +181,8 @@ static void manejarLEDs(){
 			LedOn(LED_AMARILLO);
 			LedOn(LED_ROJO);
 		}
-	
-		vTaskDelay(CONFIG_BLINK_PERIOD_LED / portTICK_PERIOD_MS);
+		// No hace falta el delay porque usamos la funcion manejarLeds() en otra tarea
+		//vTaskDelay(CONFIG_BLINK_PERIOD_LED / portTICK_PERIOD_MS);
 }
 /**
  * @fn void encenderAlarmaSonoraPeligro()
@@ -236,6 +260,9 @@ static void tareaCAD(void *pvParameter){
  * @param param Parametro no utilizado
  */
 void sumaEjes(){
+	//ESTA CONVERSIÓN ESTÁ MAL
+	//seria:
+	//valor en G = (valor en Volltaje - 1,65)/pendiente de la recta[0,3]
 	int v_analog_x_G = (v_analog_x*5.5)/3.3 ;
 	int v_analog_y_G = (v_analog_y*5.5)/3.3 ;
 	int v_analog_z_G = (v_analog_z*5.5)/3.3 ;
@@ -284,12 +311,22 @@ void FuncTimerB(void* param){
 void app_main(void){
 	LedsInit();
 	HcSr04Init(GPIO_3, GPIO_2);
- 	GPIOInit(GPIO_BUZZER);
+ 	GPIOInit(GPIO_BUZZER, GPIO_OUTPUT);
 	
 	xTaskCreate(&tareaMedir, "Medir", 2048, NULL, 5, &medir_task_handle);
 	xTaskCreate(&tareaDistancia, "Distancia y anexos", 2048, NULL, 5, &distancia_task_handle);
 	xTaskCreate(&tareaUART, "UART", 2048, NULL, 5, &uart_task_handle);
 	xTaskCreate(tareaCAD, "CAD", 2048, NULL, 5, &cad_task_handle);
+
+	//Inicializacion de UART
+	serial_config_t mi_uart = {
+		.port = UART_CONNECTOR,
+		.baud_rate = 9600,
+		.func_p = NULL,
+		.param_p = NULL
+	};
+	UartInit(&mi_uart);
+	
 	//Configuracion de los timers
 	timer_config_t timer_distancia = {
         .timer = TIMER_A,
