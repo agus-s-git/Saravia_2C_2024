@@ -1,0 +1,27 @@
+var recuperatorio__saravia_8c =
+[
+    [ "CONFIG_BLINK_PERIOD_CAD", "recuperatorio__saravia_8c.html#adcf3e162f26d4b472b97897ce4052542", null ],
+    [ "CONFIG_BLINK_PERIOD_LED", "recuperatorio__saravia_8c.html#acf54cf637d1a25c629a4b71362b020aa", null ],
+    [ "CONFIG_BLINK_PERIOD_VELOCIDAD", "recuperatorio__saravia_8c.html#ae3116bb5b25eaea060d189523b409303", null ],
+    [ "CONFIG_PERIOD_A", "recuperatorio__saravia_8c.html#a1656925709754fc3169a53e6b11e1b62", null ],
+    [ "GPIO_BARRERA", "recuperatorio__saravia_8c.html#a045dc6cd8bdd3efdbb550e557167c70f", null ],
+    [ "app_main", "recuperatorio__saravia_8c.html#a630544a7f0a2cc40d8a7fefab7e2fe70", null ],
+    [ "calcular_peso", "recuperatorio__saravia_8c.html#af9625cfea7240157a5e198bf317d6082", null ],
+    [ "calcular_velocidad", "recuperatorio__saravia_8c.html#a004565c2152269eb339171bdd1f85320", null ],
+    [ "detectarTeclas", "recuperatorio__saravia_8c.html#a36a849da5e1cf1cc8bcbdfd576704907", null ],
+    [ "FuncTimerB", "recuperatorio__saravia_8c.html#a5088c3325764095ca222dc78c328f466", null ],
+    [ "FuncTimerDistancia", "recuperatorio__saravia_8c.html#a782aaf4d6cd099dc6bb9316292e45e30", null ],
+    [ "manejarLEDs", "recuperatorio__saravia_8c.html#a1b005ac9371c0cdcb503b6001d30112f", null ],
+    [ "tareaCAD", "recuperatorio__saravia_8c.html#aba9ad1614461d2452dd143dadff0535d", null ],
+    [ "tareaMedir", "recuperatorio__saravia_8c.html#a50430825f1c4fea3e112d86092983952", null ],
+    [ "tareaUart", "recuperatorio__saravia_8c.html#a5e044b1a14347a9c02a1214c80e57200", null ],
+    [ "cad_task_handle", "recuperatorio__saravia_8c.html#af5ef51060c34ddff4c174ef1d60166e7", null ],
+    [ "DISTANCIA", "recuperatorio__saravia_8c.html#aff49de2782e838ee81247e09cc13b23c", null ],
+    [ "medir_task_handle", "recuperatorio__saravia_8c.html#a2b0cb40d7a31ce7e8b3f906fd55df312", null ],
+    [ "PESO", "recuperatorio__saravia_8c.html#a200ed20c8beb87eb069c7666400e5727", null ],
+    [ "uart_task_handle", "recuperatorio__saravia_8c.html#a4e4967ac70f1e8a89b2fea62027a968c", null ],
+    [ "v_analog_g1", "recuperatorio__saravia_8c.html#a77c1e84fad3dcb72d8845c1ddab98101", null ],
+    [ "v_analog_g2", "recuperatorio__saravia_8c.html#a36dd0148d02889e666efded8701a4bd6", null ],
+    [ "VEHICULO_DETENIDO", "recuperatorio__saravia_8c.html#a3c00a4389dc319fb75fabd009ab09514", null ],
+    [ "VELOCIDAD", "recuperatorio__saravia_8c.html#a4eaecb248beca16d77becf0ef9f0a87e", null ]
+];
