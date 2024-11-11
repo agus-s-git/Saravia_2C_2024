@@ -2,7 +2,11 @@
  *
  * @section Descripción
  *
- 
+ * El programa mide la velocidad de un vehiculo utilizando el sensor HC-SR04,
+ * también con los leds de la placa indica la velocidad. Además, se utilizab dos
+ * sensores analogicos para medir el peso del vehiculo, este peso es enviado por
+ * UART al igual que la velocidad. El usuario es capaz de controlar una barrera
+ * con las teclas 'o' y 'c'.
  *
  * 
  *
@@ -12,7 +16,12 @@
  * |-------------|--------------|
  * |  HC-SR04 Trig | GPIO_3     |
  * |  HC-SR04 Echo | GPIO_2     |
- *
+ * |  LED 1        |  GPIO_10     |
+ * |  LED 2        |  GPIO_11     |
+ * |  LED 3        |  GPIO_5      |
+ * |   BARRERA     |  GPIO_20     |
+ * |   ADC_GALGA_1 |    CH0       |
+ * |   ADC_GALGA_2 |    CH1       |
  *
  *
  * @section changelog Changelog
@@ -44,11 +53,15 @@
 */ 
 #define CONFIG_BLINK_PERIOD_LED 1000
 /**
- * @def CONFIG_BLINK_PERIOD_PESO
- * @brief Periodo de calculo del peso del vehiculo 
+ * @def CONFIG_BLINK_PERIOD_LED
+ * @brief Periodo de calculo de la velocidad 
 */ 
-#define CONFIG_BLINK_PERIOD_PESO 500
-
+#define CONFIG_BLINK_PERIOD_VELOCIDAD 1000
+/**
+ * @def CONFIG_PERIOD_A
+ * @brief  Período de configuración para el temporizador A correspondiente a medir, en microsegundos
+ */
+#define CONFIG_PERIOD_A 100000
 /**
  * @def CONFIG_BLINK_PERIOD_CAD
  * @brief Período del temporizador para la tarea CAD en MICROSEGUNDOS.
@@ -59,37 +72,19 @@
  * @brief GPIO de la barrera.
  */
 #define GPIO_BARRERA GPIO_20
-
-uint16_t v_analog_g1;
-uint16_t v_analog_g2;
-
-/*==================[internal data definition]===============================*/
 /*! @brief Variable para almacenar la distancia medida en centímetros */
 uint16_t DISTANCIA;
-
-//*! @brief Variable para almacenar la distancia medida en centímetros para eñ calculo de velocidad*/
-//const char DISTANCIA_VEL[10] = 0;
-//*! @brief Variable para almacenar el valor de tiempo */
-//const char TIEMPO_VEL[10] = 0;
-
 /*! @brief Variable para almacenar la velocidad en metros sobre segundo */
 uint16_t VELOCIDAD;
-
-// /**
-//  * @def DELAY_MEDIR
-//  * @brief Intervalo de tiempo para medir la distancia en milisegundos 
-//  */
-// #define DELAY_MEDIR 100
 /*! @brief Variable para almacenar el peso en kilogramos */
 uint16_t PESO;
-
-/**
- * @def CONFIG_PERIOD_A
- * @brief  Período de configuración para el temporizador A en microsegundos
- */
-#define CONFIG_PERIOD_A 100000
-
+/*! @brief Variable donde se almacena el valor del conversor de la galga 1 */
+uint16_t v_analog_g1;
+/*! @brief Variable donde se almacena el valor del conversor de la galga 2 */
+uint16_t v_analog_g2;
+/*! @brief Variable que indica si el vehiculo está detenido(true: está detenido, false: está en marcha) */
 bool VEHICULO_DETENIDO;
+/*==================[internal data definition]===============================*/
 
 /*! @brief Manejador de la tarea de medición de distancia */
 TaskHandle_t medir_task_handle = NULL;
@@ -97,7 +92,9 @@ TaskHandle_t medir_task_handle = NULL;
 TaskHandle_t cad_task_handle = NULL;
 /*! @brief Manejador de la tarea del control de la UART */
 TaskHandle_t uart_task_handle = NULL;
+
 /*==================[internal functions declaration]=========================*/
+
 /**
  * @fn static void tareaMedir(void *pvParameter)
  * @brief Tarea que mide la distancia utilizando el sensor HC-SR04.
@@ -111,14 +108,17 @@ static void tareaMedir(void *pvParameter){
 	}
 	
 }
-
+/**
+ * @fncalcular_velocidad()
+ * @brief Función que calcula la velocidad.
+ */
 void calcular_velocidad(){
 
 	char DISTANCIA_VEL [10]; //Buffer de tamaño 10
 	char TIEMPO_VEL [10]; //Buffer de tamaño 10
 	int delta_distancia;
 	int delta_tiempo;
-
+	
 	if (DISTANCIA < 100)
 	{
 		for (int i = 0; i < 10; i++)
@@ -134,7 +134,7 @@ void calcular_velocidad(){
 	}
 		VELOCIDAD = delta_distancia / delta_tiempo ; 
 
-		//FALTA VTASKDELAY O TIMER O EJECUTARLA EN ALGUN LADO
+	vTaskDelay(CONFIG_BLINK_PERIOD_VELOCIDAD / portTICK_PERIOD_MS);
 }
 
 /**
@@ -144,8 +144,6 @@ void calcular_velocidad(){
 static void manejarLEDs(){	
 
 	LedsOffAll();
-
-	calcular_velocidad();
 
 	if (VELOCIDAD > 8)
 	{
@@ -195,7 +193,8 @@ void calcular_peso(){
 	//Pasaje de mV a Kg
 	int v_analog_g1_kg = (v_analog_g1/20000) / 1000 ; 
 	int v_analog_g2_kg = (v_analog_g2/20000) / 1000 ;
-
+	int promedio_g1;
+	int promedio_g2;
 
 	if (VEHICULO_DETENIDO == true)
 	{	
@@ -208,19 +207,17 @@ void calcular_peso(){
 			acum_g2_kg =+ v_analog_g2_kg;
 		}
 
-		int promedio_g1 = acum_g1_kg/50 ;
-		int promedio_g2 = acum_g2_kg/50 ;
+		promedio_g1 = acum_g1_kg/50 ;
+		promedio_g2 = acum_g2_kg/50 ;
 
-		PESO = promedio_g1 + promedio_g2 ;
-		
 	}
+		PESO = promedio_g1 + promedio_g2 ;
 	
-	vTaskDelay(CONFIG_BLINK_PERIOD_PESO / portTICK_PERIOD_MS);
 
 }
 void tareaUart(void *pvParameter){
 	while(true){
-		calcular_velocidad();
+		
 		calcular_peso();
 
 		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
@@ -280,9 +277,7 @@ void app_main(void){
 	LedsInit();
 	GPIOInit(GPIO_BARRERA, GPIO_OUTPUT);
 
-	xTaskCreate(&tareaMedir, "Medir", 2048, NULL, 5, &medir_task_handle);
-	xTaskCreate(&tareaCAD, "CAD", 2048, NULL, 5, &cad_task_handle);
-	xTaskCreate(&tareaUart, "UART", 2048, &mi_uart, 5, &uart_task_handle);
+
 
 	//Inicializacion de UART
 	serial_config_t mi_uart = {
@@ -324,6 +319,10 @@ void app_main(void){
 		.mode = ADC_SINGLE,
 	};
 	AnalogInputInit(&convAD_G2);
+
+	xTaskCreate(&tareaMedir, "Medir", 2048, NULL, 5, &medir_task_handle);
+	xTaskCreate(&tareaCAD, "CAD", 2048, NULL, 5, &cad_task_handle);
+	xTaskCreate(&tareaUart, "UART", 2048, &mi_uart, 5, &uart_task_handle);
 
 	TimerStart(timer_distancia.timer);
 	TimerStart(timer_CAD.timer);
