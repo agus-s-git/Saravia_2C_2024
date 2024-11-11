@@ -37,7 +37,11 @@
 #include "uart_mcu.h"
 #include "analog_io_mcu.h"
 /*==================[macros and definitions]=================================*/
-
+/**
+ * @def CONFIG_BLINK_PERIOD_LED
+ * @brief Periodo de parpadeo de los LEDs en milisegundos 
+*/ 
+#define CONFIG_BLINK_PERIOD_LED 1000
 
 /*==================[internal data definition]===============================*/
 /*! @brief Variable para almacenar la distancia medida en centímetros */
@@ -63,6 +67,8 @@ uint16_t VELOCIDAD;
  * @brief  Período de configuración para el temporizador A en microsegundos
  */
 #define CONFIG_PERIOD_A 100000
+
+bool VEHICULO_DETENIDO;
 
 /*! @brief Manejador de la tarea de medición de distancia */
 TaskHandle_t medir_task_handle = NULL;
@@ -90,7 +96,7 @@ void calcular_velocidad()
 	{
 		for (int i = 1; i < 10; i++)
 		{
-			char DISTANCIA_VEL[i] = (DISTANCIA / 100) ; //Guardo el valor de distancia
+			char DISTANCIA_VEL[i] = (DISTANCIA / 100) ; //Guardo el valor de distancia en metros
 			char TIEMPO_VEL[i] = (i * 0.1); //Guardo el tiempo en segundos	
 		}
 		
@@ -101,6 +107,39 @@ void calcular_velocidad()
 		
 	}
 }
+
+/**
+ * @fn manejarLEDs()
+ * @brief Función que controla el encendido de los LEDs según la velocidad medida.
+ */
+static void manejarLEDs(){	
+
+	LedsOffAll();
+
+	if (VELOCIDAD > 8)
+	{
+		LedOn(LED_3);
+		LedOff(LED_2);
+		LedOff(LED_1);
+	}
+	else if (VELOCIDAD > 0 && VELOCIDAD <= 8)
+	{
+		LedOn(LED_2);
+		LedOff(LED_3);
+		LedOff(LED_1);
+			
+	}
+	else if (VELOCIDAD == 0)
+	{
+		VEHICULO_DETENIDO == true ;
+		
+		LedOn(LED_1);
+		LedOff(LED_2);
+		LedOff(LED_3);
+	}
+	vTaskDelay(CONFIG_BLINK_PERIOD_LED / portTICK_PERIOD_MS);
+}
+
 /**
  * @fn void FuncTimerDistancia(void* param)
  * @brief Función asociada al temporizador para activar el manejo de la distancia y extras.
