@@ -1,0 +1,783 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.11.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Recuperatorio SARAVIA: Referencia del archivo C:/Repositorios/Saravia_2C_2024/firmware/projects/recuperatorio_saravia/main/recuperatorio_saravia.c</title>
+<link rel="icon" href="icon.ico" type="image/x-icon" />
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="fiuner.png"/></td>
+  <td id="projectalign">
+   <div id="projectname">Recuperatorio SARAVIA<span id="projectnumber">&#160;1.0</span>
+   </div>
+  </td>
+    <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.11.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){initNavTree('recuperatorio__saravia_8c.html',''); initResizable(true); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#define-members">defines</a> &#124;
+<a href="#func-members">Funciones</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">Referencia del archivo recuperatorio_saravia.c</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdint.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="hc__sr04_8h_source.html">hc_sr04.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="led_8h_source.html">led.h</a>&quot;</code><br />
+<code>#include &quot;freertos/FreeRTOS.h&quot;</code><br />
+<code>#include &quot;freertos/task.h&quot;</code><br />
+<code>#include &lt;<a class="el" href="gpio__mcu_8h_source.html">gpio_mcu.h</a>&gt;</code><br />
+<code>#include &quot;<a class="el" href="timer__mcu_8h_source.html">timer_mcu.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="uart__mcu_8h_source.html">uart_mcu.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="analog__io__mcu_8h_source.html">analog_io_mcu.h</a>&quot;</code><br />
+</div>
+<p><a href="recuperatorio__saravia_8c_source.html">Ir al código fuente de este archivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+defines</h2></td></tr>
+<tr class="memitem:acf54cf637d1a25c629a4b71362b020aa" id="r_acf54cf637d1a25c629a4b71362b020aa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acf54cf637d1a25c629a4b71362b020aa">CONFIG_BLINK_PERIOD_LED</a>&#160;&#160;&#160;1000</td></tr>
+<tr class="memdesc:acf54cf637d1a25c629a4b71362b020aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Periodo de parpadeo de los LEDs en milisegundos.  <br /></td></tr>
+<tr class="separator:acf54cf637d1a25c629a4b71362b020aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3116bb5b25eaea060d189523b409303" id="r_ae3116bb5b25eaea060d189523b409303"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae3116bb5b25eaea060d189523b409303">CONFIG_BLINK_PERIOD_VELOCIDAD</a>&#160;&#160;&#160;1000</td></tr>
+<tr class="separator:ae3116bb5b25eaea060d189523b409303"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1656925709754fc3169a53e6b11e1b62" id="r_a1656925709754fc3169a53e6b11e1b62"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1656925709754fc3169a53e6b11e1b62">CONFIG_PERIOD_A</a>&#160;&#160;&#160;100000</td></tr>
+<tr class="memdesc:a1656925709754fc3169a53e6b11e1b62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Período de configuración para el temporizador A correspondiente a medir, en microsegundos.  <br /></td></tr>
+<tr class="separator:a1656925709754fc3169a53e6b11e1b62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adcf3e162f26d4b472b97897ce4052542" id="r_adcf3e162f26d4b472b97897ce4052542"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adcf3e162f26d4b472b97897ce4052542">CONFIG_BLINK_PERIOD_CAD</a>&#160;&#160;&#160;5000</td></tr>
+<tr class="memdesc:adcf3e162f26d4b472b97897ce4052542"><td class="mdescLeft">&#160;</td><td class="mdescRight">Período del temporizador para la tarea CAD en MICROSEGUNDOS.  <br /></td></tr>
+<tr class="separator:adcf3e162f26d4b472b97897ce4052542"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a045dc6cd8bdd3efdbb550e557167c70f" id="r_a045dc6cd8bdd3efdbb550e557167c70f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a045dc6cd8bdd3efdbb550e557167c70f">GPIO_BARRERA</a>&#160;&#160;&#160;<a class="el" href="group___g_i_o_p.html#ggaf65604147d0244c9b13cfdc865ad5393a081be372da926e3ca6f612b267854e95">GPIO_20</a></td></tr>
+<tr class="memdesc:a045dc6cd8bdd3efdbb550e557167c70f"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPIO de la barrera.  <br /></td></tr>
+<tr class="separator:a045dc6cd8bdd3efdbb550e557167c70f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Funciones</h2></td></tr>
+<tr class="memitem:a50430825f1c4fea3e112d86092983952" id="r_a50430825f1c4fea3e112d86092983952"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a50430825f1c4fea3e112d86092983952">tareaMedir</a> (void *pvParameter)</td></tr>
+<tr class="memdesc:a50430825f1c4fea3e112d86092983952"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tarea que mide la distancia utilizando el sensor HC-SR04.  <br /></td></tr>
+<tr class="separator:a50430825f1c4fea3e112d86092983952"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a004565c2152269eb339171bdd1f85320" id="r_a004565c2152269eb339171bdd1f85320"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a004565c2152269eb339171bdd1f85320">calcular_velocidad</a> ()</td></tr>
+<tr class="memdesc:a004565c2152269eb339171bdd1f85320"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función que calcula la velocidad.  <br /></td></tr>
+<tr class="separator:a004565c2152269eb339171bdd1f85320"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b005ac9371c0cdcb503b6001d30112f" id="r_a1b005ac9371c0cdcb503b6001d30112f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1b005ac9371c0cdcb503b6001d30112f">manejarLEDs</a> ()</td></tr>
+<tr class="memdesc:a1b005ac9371c0cdcb503b6001d30112f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función que controla el encendido de los LEDs según la velocidad medida.  <br /></td></tr>
+<tr class="separator:a1b005ac9371c0cdcb503b6001d30112f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba9ad1614461d2452dd143dadff0535d" id="r_aba9ad1614461d2452dd143dadff0535d"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aba9ad1614461d2452dd143dadff0535d">tareaCAD</a> (void *pvParameter)</td></tr>
+<tr class="memdesc:aba9ad1614461d2452dd143dadff0535d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tarea que lee un dato analógico de cada galga (1 y 2)  <br /></td></tr>
+<tr class="separator:aba9ad1614461d2452dd143dadff0535d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9625cfea7240157a5e198bf317d6082" id="r_af9625cfea7240157a5e198bf317d6082"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af9625cfea7240157a5e198bf317d6082">calcular_peso</a> ()</td></tr>
+<tr class="memdesc:af9625cfea7240157a5e198bf317d6082"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función que que calcula el peso promediado de 50 mediciones de cada balanza.  <br /></td></tr>
+<tr class="separator:af9625cfea7240157a5e198bf317d6082"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e044b1a14347a9c02a1214c80e57200" id="r_a5e044b1a14347a9c02a1214c80e57200"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5e044b1a14347a9c02a1214c80e57200">tareaUart</a> (void *pvParameter)</td></tr>
+<tr class="separator:a5e044b1a14347a9c02a1214c80e57200"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36a849da5e1cf1cc8bcbdfd576704907" id="r_a36a849da5e1cf1cc8bcbdfd576704907"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a36a849da5e1cf1cc8bcbdfd576704907">detectarTeclas</a> (void *param)</td></tr>
+<tr class="memdesc:a36a849da5e1cf1cc8bcbdfd576704907"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función para detectar lo que se envía por el serial monitor ("o" o "c")  <br /></td></tr>
+<tr class="separator:a36a849da5e1cf1cc8bcbdfd576704907"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a782aaf4d6cd099dc6bb9316292e45e30" id="r_a782aaf4d6cd099dc6bb9316292e45e30"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a782aaf4d6cd099dc6bb9316292e45e30">FuncTimerDistancia</a> (void *param)</td></tr>
+<tr class="memdesc:a782aaf4d6cd099dc6bb9316292e45e30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función asociada al temporizador para activar el manejo de la distancia.  <br /></td></tr>
+<tr class="separator:a782aaf4d6cd099dc6bb9316292e45e30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5088c3325764095ca222dc78c328f466" id="r_a5088c3325764095ca222dc78c328f466"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5088c3325764095ca222dc78c328f466">FuncTimerB</a> (void *param)</td></tr>
+<tr class="separator:a5088c3325764095ca222dc78c328f466"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a630544a7f0a2cc40d8a7fefab7e2fe70" id="r_a630544a7f0a2cc40d8a7fefab7e2fe70"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a630544a7f0a2cc40d8a7fefab7e2fe70">app_main</a> (void)</td></tr>
+<tr class="separator:a630544a7f0a2cc40d8a7fefab7e2fe70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:aff49de2782e838ee81247e09cc13b23c" id="r_aff49de2782e838ee81247e09cc13b23c"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aff49de2782e838ee81247e09cc13b23c">DISTANCIA</a></td></tr>
+<tr class="memdesc:aff49de2782e838ee81247e09cc13b23c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Variable para almacenar la distancia medida en centímetros.  <br /></td></tr>
+<tr class="separator:aff49de2782e838ee81247e09cc13b23c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4eaecb248beca16d77becf0ef9f0a87e" id="r_a4eaecb248beca16d77becf0ef9f0a87e"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4eaecb248beca16d77becf0ef9f0a87e">VELOCIDAD</a></td></tr>
+<tr class="memdesc:a4eaecb248beca16d77becf0ef9f0a87e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Variable para almacenar la velocidad en metros sobre segundo.  <br /></td></tr>
+<tr class="separator:a4eaecb248beca16d77becf0ef9f0a87e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a200ed20c8beb87eb069c7666400e5727" id="r_a200ed20c8beb87eb069c7666400e5727"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a200ed20c8beb87eb069c7666400e5727">PESO</a></td></tr>
+<tr class="memdesc:a200ed20c8beb87eb069c7666400e5727"><td class="mdescLeft">&#160;</td><td class="mdescRight">Variable para almacenar el peso en kilogramos.  <br /></td></tr>
+<tr class="separator:a200ed20c8beb87eb069c7666400e5727"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77c1e84fad3dcb72d8845c1ddab98101" id="r_a77c1e84fad3dcb72d8845c1ddab98101"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a77c1e84fad3dcb72d8845c1ddab98101">v_analog_g1</a></td></tr>
+<tr class="memdesc:a77c1e84fad3dcb72d8845c1ddab98101"><td class="mdescLeft">&#160;</td><td class="mdescRight">Variable donde se almacena el valor del conversor de la galga 1.  <br /></td></tr>
+<tr class="separator:a77c1e84fad3dcb72d8845c1ddab98101"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36dd0148d02889e666efded8701a4bd6" id="r_a36dd0148d02889e666efded8701a4bd6"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a36dd0148d02889e666efded8701a4bd6">v_analog_g2</a></td></tr>
+<tr class="memdesc:a36dd0148d02889e666efded8701a4bd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Variable donde se almacena el valor del conversor de la galga 2.  <br /></td></tr>
+<tr class="separator:a36dd0148d02889e666efded8701a4bd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c00a4389dc319fb75fabd009ab09514" id="r_a3c00a4389dc319fb75fabd009ab09514"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3c00a4389dc319fb75fabd009ab09514">VEHICULO_DETENIDO</a></td></tr>
+<tr class="memdesc:a3c00a4389dc319fb75fabd009ab09514"><td class="mdescLeft">&#160;</td><td class="mdescRight">Variable que indica si el vehiculo está detenido(true: está detenido, false: está en marcha)  <br /></td></tr>
+<tr class="separator:a3c00a4389dc319fb75fabd009ab09514"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b0cb40d7a31ce7e8b3f906fd55df312" id="r_a2b0cb40d7a31ce7e8b3f906fd55df312"><td class="memItemLeft" align="right" valign="top">TaskHandle_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2b0cb40d7a31ce7e8b3f906fd55df312">medir_task_handle</a> = <a class="el" href="ili9341_8c.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></td></tr>
+<tr class="memdesc:a2b0cb40d7a31ce7e8b3f906fd55df312"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manejador de la tarea de medición de distancia.  <br /></td></tr>
+<tr class="separator:a2b0cb40d7a31ce7e8b3f906fd55df312"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5ef51060c34ddff4c174ef1d60166e7" id="r_af5ef51060c34ddff4c174ef1d60166e7"><td class="memItemLeft" align="right" valign="top">TaskHandle_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af5ef51060c34ddff4c174ef1d60166e7">cad_task_handle</a> = <a class="el" href="ili9341_8c.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></td></tr>
+<tr class="memdesc:af5ef51060c34ddff4c174ef1d60166e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manejador de la tarea CAD.  <br /></td></tr>
+<tr class="separator:af5ef51060c34ddff4c174ef1d60166e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e4967ac70f1e8a89b2fea62027a968c" id="r_a4e4967ac70f1e8a89b2fea62027a968c"><td class="memItemLeft" align="right" valign="top">TaskHandle_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4e4967ac70f1e8a89b2fea62027a968c">uart_task_handle</a> = <a class="el" href="ili9341_8c.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></td></tr>
+<tr class="memdesc:a4e4967ac70f1e8a89b2fea62027a968c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manejador de la tarea del control de la UART.  <br /></td></tr>
+<tr class="separator:a4e4967ac70f1e8a89b2fea62027a968c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Documentación de «define»</h2>
+<a id="adcf3e162f26d4b472b97897ce4052542" name="adcf3e162f26d4b472b97897ce4052542"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adcf3e162f26d4b472b97897ce4052542">&#9670;&#160;</a></span>CONFIG_BLINK_PERIOD_CAD</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CONFIG_BLINK_PERIOD_CAD&#160;&#160;&#160;5000</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Período del temporizador para la tarea CAD en MICROSEGUNDOS. </p>
+
+<p class="definition">Definición en la línea <a class="el" href="recuperatorio__saravia_8c_source.html#l00069">69</a> del archivo <a class="el" href="recuperatorio__saravia_8c_source.html">recuperatorio_saravia.c</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="recuperatorio__saravia_8c_source.html#l00274">app_main()</a>.</p>
+
+</div>
+</div>
+<a id="acf54cf637d1a25c629a4b71362b020aa" name="acf54cf637d1a25c629a4b71362b020aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf54cf637d1a25c629a4b71362b020aa">&#9670;&#160;</a></span>CONFIG_BLINK_PERIOD_LED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CONFIG_BLINK_PERIOD_LED&#160;&#160;&#160;1000</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Periodo de parpadeo de los LEDs en milisegundos. </p>
+<p>Periodo de calculo de la velocidad. </p>
+
+<p class="definition">Definición en la línea <a class="el" href="recuperatorio__saravia_8c_source.html#l00054">54</a> del archivo <a class="el" href="recuperatorio__saravia_8c_source.html">recuperatorio_saravia.c</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="recuperatorio__saravia_8c_source.html#l00144">manejarLEDs()</a>.</p>
+
+</div>
+</div>
+<a id="ae3116bb5b25eaea060d189523b409303" name="ae3116bb5b25eaea060d189523b409303"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3116bb5b25eaea060d189523b409303">&#9670;&#160;</a></span>CONFIG_BLINK_PERIOD_VELOCIDAD</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CONFIG_BLINK_PERIOD_VELOCIDAD&#160;&#160;&#160;1000</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="recuperatorio__saravia_8c_source.html#l00059">59</a> del archivo <a class="el" href="recuperatorio__saravia_8c_source.html">recuperatorio_saravia.c</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="recuperatorio__saravia_8c_source.html#l00115">calcular_velocidad()</a>.</p>
+
+</div>
+</div>
+<a id="a1656925709754fc3169a53e6b11e1b62" name="a1656925709754fc3169a53e6b11e1b62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1656925709754fc3169a53e6b11e1b62">&#9670;&#160;</a></span>CONFIG_PERIOD_A</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CONFIG_PERIOD_A&#160;&#160;&#160;100000</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Período de configuración para el temporizador A correspondiente a medir, en microsegundos. </p>
+
+<p class="definition">Definición en la línea <a class="el" href="recuperatorio__saravia_8c_source.html#l00064">64</a> del archivo <a class="el" href="recuperatorio__saravia_8c_source.html">recuperatorio_saravia.c</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="recuperatorio__saravia_8c_source.html#l00274">app_main()</a>.</p>
+
+</div>
+</div>
+<a id="a045dc6cd8bdd3efdbb550e557167c70f" name="a045dc6cd8bdd3efdbb550e557167c70f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a045dc6cd8bdd3efdbb550e557167c70f">&#9670;&#160;</a></span>GPIO_BARRERA</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GPIO_BARRERA&#160;&#160;&#160;<a class="el" href="group___g_i_o_p.html#ggaf65604147d0244c9b13cfdc865ad5393a081be372da926e3ca6f612b267854e95">GPIO_20</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>GPIO de la barrera. </p>
+
+<p class="definition">Definición en la línea <a class="el" href="recuperatorio__saravia_8c_source.html#l00074">74</a> del archivo <a class="el" href="recuperatorio__saravia_8c_source.html">recuperatorio_saravia.c</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="recuperatorio__saravia_8c_source.html#l00274">app_main()</a> y <a class="el" href="recuperatorio__saravia_8c_source.html#l00240">detectarTeclas()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Documentación de funciones</h2>
+<a id="a630544a7f0a2cc40d8a7fefab7e2fe70" name="a630544a7f0a2cc40d8a7fefab7e2fe70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a630544a7f0a2cc40d8a7fefab7e2fe70">&#9670;&#160;</a></span>app_main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void app_main </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="recuperatorio__saravia_8c_source.html#l00274">274</a> del archivo <a class="el" href="recuperatorio__saravia_8c_source.html">recuperatorio_saravia.c</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="analog__io__mcu_8h_source.html#l00038">ADC_SINGLE</a>, <a class="el" href="analog__io__mcu_8c_source.html#l00045">AnalogInputInit()</a>, <a class="el" href="recuperatorio__saravia_8c_source.html#l00092">cad_task_handle</a>, <a class="el" href="analog__io__mcu_8h_source.html#l00031">CH0</a>, <a class="el" href="analog__io__mcu_8h_source.html#l00032">CH1</a>, <a class="el" href="recuperatorio__saravia_8c_source.html#l00069">CONFIG_BLINK_PERIOD_CAD</a>, <a class="el" href="recuperatorio__saravia_8c_source.html#l00064">CONFIG_PERIOD_A</a>, <a class="el" href="recuperatorio__saravia_8c_source.html#l00240">detectarTeclas()</a>, <a class="el" href="recuperatorio__saravia_8c_source.html#l00269">FuncTimerB()</a>, <a class="el" href="recuperatorio__saravia_8c_source.html#l00261">FuncTimerDistancia()</a>, <a class="el" href="gpio__mcu_8h_source.html#l00054">GPIO_2</a>, <a class="el" href="gpio__mcu_8h_source.html#l00055">GPIO_3</a>, <a class="el" href="recuperatorio__saravia_8c_source.html#l00074">GPIO_BARRERA</a>, <a class="el" href="gpio__mcu_8h_source.html#l00044">GPIO_OUTPUT</a>, <a class="el" href="gpio__mcu_8c_source.html#l00067">GPIOInit()</a>, <a class="el" href="hc__sr04_8c_source.html#l00034">HcSr04Init()</a>, <a class="el" href="analog__io__mcu_8h_source.html#l00049">analog_input_config_t::input</a>, <a class="el" href="led_8c_source.html#l00031">LedsInit()</a>, <a class="el" href="recuperatorio__saravia_8c_source.html#l00090">medir_task_handle</a>, <a class="el" href="ili9341_8c_source.html#l00019">NULL</a>, <a class="el" href="uart__mcu_8h_source.html#l00039">serial_config_t::port</a>, <a class="el" href="recuperatorio__saravia_8c_source.html#l00178">tareaCAD()</a>, <a class="el" href="recuperatorio__saravia_8c_source.html#l00103">tareaMedir()</a>, <a class="el" href="recuperatorio__saravia_8c_source.html#l00218">tareaUart()</a>, <a class="el" href="timer__mcu_8h_source.html#l00040">timer_config_t::timer</a>, <a class="el" href="timer__mcu_8h_source.html#l00032">TIMER_A</a>, <a class="el" href="timer__mcu_8h_source.html#l00033">TIMER_B</a>, <a class="el" href="timer__mcu_8c_source.html#l00067">TimerInit()</a>, <a class="el" href="timer__mcu_8c_source.html#l00116">TimerStart()</a>, <a class="el" href="uart__mcu_8h_source.html#l00032">UART_PC</a>, <a class="el" href="recuperatorio__saravia_8c_source.html#l00094">uart_task_handle</a> y <a class="el" href="uart__mcu_8c_source.html#l00107">UartInit()</a>.</p>
+
+</div>
+</div>
+<a id="af9625cfea7240157a5e198bf317d6082" name="af9625cfea7240157a5e198bf317d6082"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9625cfea7240157a5e198bf317d6082">&#9670;&#160;</a></span>calcular_peso()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void calcular_peso </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función que que calcula el peso promediado de 50 mediciones de cada balanza. </p>
+
+<p class="definition">Definición en la línea <a class="el" href="recuperatorio__saravia_8c_source.html#l00191">191</a> del archivo <a class="el" href="recuperatorio__saravia_8c_source.html">recuperatorio_saravia.c</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="recuperatorio__saravia_8c_source.html#l00080">PESO</a>, <a class="el" href="recuperatorio__saravia_8c_source.html#l00082">v_analog_g1</a>, <a class="el" href="recuperatorio__saravia_8c_source.html#l00084">v_analog_g2</a> y <a class="el" href="recuperatorio__saravia_8c_source.html#l00086">VEHICULO_DETENIDO</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="recuperatorio__saravia_8c_source.html#l00218">tareaUart()</a>.</p>
+
+</div>
+</div>
+<a id="a004565c2152269eb339171bdd1f85320" name="a004565c2152269eb339171bdd1f85320"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a004565c2152269eb339171bdd1f85320">&#9670;&#160;</a></span>calcular_velocidad()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void calcular_velocidad </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función que calcula la velocidad. </p>
+<p>@fncalcular_velocidad() </p>
+
+<p class="definition">Definición en la línea <a class="el" href="recuperatorio__saravia_8c_source.html#l00115">115</a> del archivo <a class="el" href="recuperatorio__saravia_8c_source.html">recuperatorio_saravia.c</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="recuperatorio__saravia_8c_source.html#l00059">CONFIG_BLINK_PERIOD_VELOCIDAD</a>, <a class="el" href="recuperatorio__saravia_8c_source.html#l00076">DISTANCIA</a> y <a class="el" href="recuperatorio__saravia_8c_source.html#l00078">VELOCIDAD</a>.</p>
+
+</div>
+</div>
+<a id="a36a849da5e1cf1cc8bcbdfd576704907" name="a36a849da5e1cf1cc8bcbdfd576704907"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36a849da5e1cf1cc8bcbdfd576704907">&#9670;&#160;</a></span>detectarTeclas()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void detectarTeclas </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>param</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función para detectar lo que se envía por el serial monitor ("o" o "c") </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">param</td><td>Parametro </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definición en la línea <a class="el" href="recuperatorio__saravia_8c_source.html#l00240">240</a> del archivo <a class="el" href="recuperatorio__saravia_8c_source.html">recuperatorio_saravia.c</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="recuperatorio__saravia_8c_source.html#l00074">GPIO_BARRERA</a>, <a class="el" href="gpio__mcu_8c_source.html#l00086">GPIOOff()</a>, <a class="el" href="gpio__mcu_8c_source.html#l00081">GPIOOn()</a>, <a class="el" href="uart__mcu_8h_source.html#l00032">UART_PC</a>, <a class="el" href="uart__mcu_8c_source.html#l00142">UartReadByte()</a> y <a class="el" href="uart__mcu_8c_source.html#l00180">UartSendByte()</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="recuperatorio__saravia_8c_source.html#l00274">app_main()</a>.</p>
+
+</div>
+</div>
+<a id="a5088c3325764095ca222dc78c328f466" name="a5088c3325764095ca222dc78c328f466"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5088c3325764095ca222dc78c328f466">&#9670;&#160;</a></span>FuncTimerB()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FuncTimerB </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>param</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="recuperatorio__saravia_8c_source.html#l00269">269</a> del archivo <a class="el" href="recuperatorio__saravia_8c_source.html">recuperatorio_saravia.c</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="recuperatorio__saravia_8c_source.html#l00092">cad_task_handle</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="recuperatorio__saravia_8c_source.html#l00274">app_main()</a>.</p>
+
+</div>
+</div>
+<a id="a782aaf4d6cd099dc6bb9316292e45e30" name="a782aaf4d6cd099dc6bb9316292e45e30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a782aaf4d6cd099dc6bb9316292e45e30">&#9670;&#160;</a></span>FuncTimerDistancia()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FuncTimerDistancia </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>param</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función asociada al temporizador para activar el manejo de la distancia. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">param</td><td>Parametro no utilizado </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definición en la línea <a class="el" href="recuperatorio__saravia_8c_source.html#l00261">261</a> del archivo <a class="el" href="recuperatorio__saravia_8c_source.html">recuperatorio_saravia.c</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="recuperatorio__saravia_8c_source.html#l00090">medir_task_handle</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="recuperatorio__saravia_8c_source.html#l00274">app_main()</a>.</p>
+
+</div>
+</div>
+<a id="a1b005ac9371c0cdcb503b6001d30112f" name="a1b005ac9371c0cdcb503b6001d30112f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b005ac9371c0cdcb503b6001d30112f">&#9670;&#160;</a></span>manejarLEDs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void manejarLEDs </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Función que controla el encendido de los LEDs según la velocidad medida. </p>
+
+<p class="definition">Definición en la línea <a class="el" href="recuperatorio__saravia_8c_source.html#l00144">144</a> del archivo <a class="el" href="recuperatorio__saravia_8c_source.html">recuperatorio_saravia.c</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="recuperatorio__saravia_8c_source.html#l00054">CONFIG_BLINK_PERIOD_LED</a>, <a class="el" href="led_8h_source.html#l00034">LED_1</a>, <a class="el" href="led_8h_source.html#l00033">LED_2</a>, <a class="el" href="led_8h_source.html#l00032">LED_3</a>, <a class="el" href="led_8c_source.html#l00065">LedOff()</a>, <a class="el" href="led_8c_source.html#l00046">LedOn()</a>, <a class="el" href="led_8c_source.html#l00105">LedsOffAll()</a>, <a class="el" href="recuperatorio__saravia_8c_source.html#l00086">VEHICULO_DETENIDO</a> y <a class="el" href="recuperatorio__saravia_8c_source.html#l00078">VELOCIDAD</a>.</p>
+
+</div>
+</div>
+<a id="aba9ad1614461d2452dd143dadff0535d" name="aba9ad1614461d2452dd143dadff0535d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba9ad1614461d2452dd143dadff0535d">&#9670;&#160;</a></span>tareaCAD()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void tareaCAD </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>pvParameter</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Tarea que lee un dato analógico de cada galga (1 y 2) </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pvParameter</td><td>Parámetro de FreeRTOS </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definición en la línea <a class="el" href="recuperatorio__saravia_8c_source.html#l00178">178</a> del archivo <a class="el" href="recuperatorio__saravia_8c_source.html">recuperatorio_saravia.c</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="analog__io__mcu_8c_source.html#l00130">AnalogInputReadSingle()</a>, <a class="el" href="analog__io__mcu_8h_source.html#l00031">CH0</a>, <a class="el" href="analog__io__mcu_8h_source.html#l00032">CH1</a>, <a class="el" href="recuperatorio__saravia_8c_source.html#l00082">v_analog_g1</a> y <a class="el" href="recuperatorio__saravia_8c_source.html#l00084">v_analog_g2</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="recuperatorio__saravia_8c_source.html#l00274">app_main()</a>.</p>
+
+</div>
+</div>
+<a id="a50430825f1c4fea3e112d86092983952" name="a50430825f1c4fea3e112d86092983952"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50430825f1c4fea3e112d86092983952">&#9670;&#160;</a></span>tareaMedir()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void tareaMedir </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>pvParameter</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Tarea que mide la distancia utilizando el sensor HC-SR04. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pvParameter</td><td>Parámetro de FreeRTOS </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definición en la línea <a class="el" href="recuperatorio__saravia_8c_source.html#l00103">103</a> del archivo <a class="el" href="recuperatorio__saravia_8c_source.html">recuperatorio_saravia.c</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="recuperatorio__saravia_8c_source.html#l00076">DISTANCIA</a> y <a class="el" href="hc__sr04_8c_source.html#l00045">HcSr04ReadDistanceInCentimeters()</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="recuperatorio__saravia_8c_source.html#l00274">app_main()</a>.</p>
+
+</div>
+</div>
+<a id="a5e044b1a14347a9c02a1214c80e57200" name="a5e044b1a14347a9c02a1214c80e57200"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e044b1a14347a9c02a1214c80e57200">&#9670;&#160;</a></span>tareaUart()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tareaUart </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>pvParameter</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="recuperatorio__saravia_8c_source.html#l00218">218</a> del archivo <a class="el" href="recuperatorio__saravia_8c_source.html">recuperatorio_saravia.c</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="recuperatorio__saravia_8c_source.html#l00191">calcular_peso()</a>, <a class="el" href="recuperatorio__saravia_8c_source.html#l00080">PESO</a>, <a class="el" href="uart__mcu_8h_source.html#l00032">UART_PC</a>, <a class="el" href="uart__mcu_8c_source.html#l00222">UartItoa()</a>, <a class="el" href="uart__mcu_8c_source.html#l00193">UartSendString()</a> y <a class="el" href="recuperatorio__saravia_8c_source.html#l00078">VELOCIDAD</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="recuperatorio__saravia_8c_source.html#l00274">app_main()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Documentación de variables</h2>
+<a id="af5ef51060c34ddff4c174ef1d60166e7" name="af5ef51060c34ddff4c174ef1d60166e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5ef51060c34ddff4c174ef1d60166e7">&#9670;&#160;</a></span>cad_task_handle</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TaskHandle_t cad_task_handle = <a class="el" href="ili9341_8c.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Manejador de la tarea CAD. </p>
+
+<p class="definition">Definición en la línea <a class="el" href="recuperatorio__saravia_8c_source.html#l00092">92</a> del archivo <a class="el" href="recuperatorio__saravia_8c_source.html">recuperatorio_saravia.c</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="recuperatorio__saravia_8c_source.html#l00274">app_main()</a> y <a class="el" href="recuperatorio__saravia_8c_source.html#l00269">FuncTimerB()</a>.</p>
+
+</div>
+</div>
+<a id="aff49de2782e838ee81247e09cc13b23c" name="aff49de2782e838ee81247e09cc13b23c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff49de2782e838ee81247e09cc13b23c">&#9670;&#160;</a></span>DISTANCIA</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t DISTANCIA</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Variable para almacenar la distancia medida en centímetros. </p>
+
+<p class="definition">Definición en la línea <a class="el" href="recuperatorio__saravia_8c_source.html#l00076">76</a> del archivo <a class="el" href="recuperatorio__saravia_8c_source.html">recuperatorio_saravia.c</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="recuperatorio__saravia_8c_source.html#l00115">calcular_velocidad()</a> y <a class="el" href="recuperatorio__saravia_8c_source.html#l00103">tareaMedir()</a>.</p>
+
+</div>
+</div>
+<a id="a2b0cb40d7a31ce7e8b3f906fd55df312" name="a2b0cb40d7a31ce7e8b3f906fd55df312"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b0cb40d7a31ce7e8b3f906fd55df312">&#9670;&#160;</a></span>medir_task_handle</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TaskHandle_t medir_task_handle = <a class="el" href="ili9341_8c.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Manejador de la tarea de medición de distancia. </p>
+
+<p class="definition">Definición en la línea <a class="el" href="recuperatorio__saravia_8c_source.html#l00090">90</a> del archivo <a class="el" href="recuperatorio__saravia_8c_source.html">recuperatorio_saravia.c</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="recuperatorio__saravia_8c_source.html#l00274">app_main()</a> y <a class="el" href="recuperatorio__saravia_8c_source.html#l00261">FuncTimerDistancia()</a>.</p>
+
+</div>
+</div>
+<a id="a200ed20c8beb87eb069c7666400e5727" name="a200ed20c8beb87eb069c7666400e5727"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a200ed20c8beb87eb069c7666400e5727">&#9670;&#160;</a></span>PESO</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t PESO</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Variable para almacenar el peso en kilogramos. </p>
+
+<p class="definition">Definición en la línea <a class="el" href="recuperatorio__saravia_8c_source.html#l00080">80</a> del archivo <a class="el" href="recuperatorio__saravia_8c_source.html">recuperatorio_saravia.c</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="recuperatorio__saravia_8c_source.html#l00191">calcular_peso()</a> y <a class="el" href="recuperatorio__saravia_8c_source.html#l00218">tareaUart()</a>.</p>
+
+</div>
+</div>
+<a id="a4e4967ac70f1e8a89b2fea62027a968c" name="a4e4967ac70f1e8a89b2fea62027a968c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e4967ac70f1e8a89b2fea62027a968c">&#9670;&#160;</a></span>uart_task_handle</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TaskHandle_t uart_task_handle = <a class="el" href="ili9341_8c.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Manejador de la tarea del control de la UART. </p>
+
+<p class="definition">Definición en la línea <a class="el" href="recuperatorio__saravia_8c_source.html#l00094">94</a> del archivo <a class="el" href="recuperatorio__saravia_8c_source.html">recuperatorio_saravia.c</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="recuperatorio__saravia_8c_source.html#l00274">app_main()</a>.</p>
+
+</div>
+</div>
+<a id="a77c1e84fad3dcb72d8845c1ddab98101" name="a77c1e84fad3dcb72d8845c1ddab98101"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77c1e84fad3dcb72d8845c1ddab98101">&#9670;&#160;</a></span>v_analog_g1</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t v_analog_g1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Variable donde se almacena el valor del conversor de la galga 1. </p>
+
+<p class="definition">Definición en la línea <a class="el" href="recuperatorio__saravia_8c_source.html#l00082">82</a> del archivo <a class="el" href="recuperatorio__saravia_8c_source.html">recuperatorio_saravia.c</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="recuperatorio__saravia_8c_source.html#l00191">calcular_peso()</a> y <a class="el" href="recuperatorio__saravia_8c_source.html#l00178">tareaCAD()</a>.</p>
+
+</div>
+</div>
+<a id="a36dd0148d02889e666efded8701a4bd6" name="a36dd0148d02889e666efded8701a4bd6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36dd0148d02889e666efded8701a4bd6">&#9670;&#160;</a></span>v_analog_g2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t v_analog_g2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Variable donde se almacena el valor del conversor de la galga 2. </p>
+
+<p class="definition">Definición en la línea <a class="el" href="recuperatorio__saravia_8c_source.html#l00084">84</a> del archivo <a class="el" href="recuperatorio__saravia_8c_source.html">recuperatorio_saravia.c</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="recuperatorio__saravia_8c_source.html#l00191">calcular_peso()</a> y <a class="el" href="recuperatorio__saravia_8c_source.html#l00178">tareaCAD()</a>.</p>
+
+</div>
+</div>
+<a id="a3c00a4389dc319fb75fabd009ab09514" name="a3c00a4389dc319fb75fabd009ab09514"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c00a4389dc319fb75fabd009ab09514">&#9670;&#160;</a></span>VEHICULO_DETENIDO</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool VEHICULO_DETENIDO</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Variable que indica si el vehiculo está detenido(true: está detenido, false: está en marcha) </p>
+
+<p class="definition">Definición en la línea <a class="el" href="recuperatorio__saravia_8c_source.html#l00086">86</a> del archivo <a class="el" href="recuperatorio__saravia_8c_source.html">recuperatorio_saravia.c</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="recuperatorio__saravia_8c_source.html#l00191">calcular_peso()</a> y <a class="el" href="recuperatorio__saravia_8c_source.html#l00144">manejarLEDs()</a>.</p>
+
+</div>
+</div>
+<a id="a4eaecb248beca16d77becf0ef9f0a87e" name="a4eaecb248beca16d77becf0ef9f0a87e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4eaecb248beca16d77becf0ef9f0a87e">&#9670;&#160;</a></span>VELOCIDAD</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t VELOCIDAD</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Variable para almacenar la velocidad en metros sobre segundo. </p>
+
+<p class="definition">Definición en la línea <a class="el" href="recuperatorio__saravia_8c_source.html#l00078">78</a> del archivo <a class="el" href="recuperatorio__saravia_8c_source.html">recuperatorio_saravia.c</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="recuperatorio__saravia_8c_source.html#l00115">calcular_velocidad()</a>, <a class="el" href="recuperatorio__saravia_8c_source.html#l00144">manejarLEDs()</a> y <a class="el" href="recuperatorio__saravia_8c_source.html#l00218">tareaUart()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d9edf6c004b4a7ff14fe9ae7a92214ee.html">firmware</a></li><li class="navelem"><a class="el" href="dir_429d80758da54da73083af4edd40d0b3.html">projects</a></li><li class="navelem"><a class="el" href="dir_63c7aec42fc1b9d48efc6090e2f26ab8.html">recuperatorio_saravia</a></li><li class="navelem"><a class="el" href="dir_f396850dba4c7e9372d10bca8c479446.html">main</a></li><li class="navelem"><a class="el" href="recuperatorio__saravia_8c.html">recuperatorio_saravia.c</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.11.0 </li>
+  </ul>
+</div>
+</body>
+</html>
