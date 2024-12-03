@@ -13,7 +13,7 @@
  * |:--------------:|:--------------|
  * |  HC-SR04 Trig  |    GPIO_3     |
  * |  HC-SR04 Echo  |    GPIO_2     |
- * |   ADC_x        |     CH0       |
+ * |   ADC          |     CH0       |
  *
  *
  * @section changelog Changelog
