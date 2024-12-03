@@ -117,6 +117,15 @@ static void tareaAguayAlimento(void *pvParameter){
 				GPIOOff(GPIO_Alimento)
 			}
 
+			//Ahora la parte de UART
+
+			UartSendString(UART_PC, "Agua: ");
+			UartSendString(UART_PC, (char*)UartItoa(VOLUMEN_AGUA, 10));
+			UartSendString(UART_PC, "cm3, Alimento: ");
+			UartSendString(UART_PC, (char*)UartItoa(PESO_ALIMENTO, 10));
+			UartSendString(UART_PC, "gr");
+			UartSendString(UART_PC, "\r\n");
+
 			vTaskDelay(DELAY_MEDIR / portTICK_PERIOD_MS);
 	}
 	
@@ -133,6 +142,15 @@ void app_main(void){
 		.mode = ADC_SINGLE,
 	};
     AnalogInputInit(&convAD);
+
+	//Inicializacion de UART
+	serial_config_t mi_uart = {
+		.port = UART_PC,
+		.baud_rate = 9600,
+		.func_p = NULL,
+		.param_p = NULL
+	};
+	UartInit(&mi_uart);
 
 	xTaskCreate(&tareaAguayAlimento, "Medir distancia y controlar agua", 2048, NULL, 5, &aguaYalimento_task_handle);
 }
