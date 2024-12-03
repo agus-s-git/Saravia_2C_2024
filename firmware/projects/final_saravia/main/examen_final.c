@@ -20,7 +20,7 @@
  *
  * |   Date	    | Description                                    |
  * |:----------:|:-----------------------------------------------|
- * | 03/012/2024 | Document creation		                         |
+ * | 03/12/2024 | Document creation		                         |
  *
  * @author Agustín Saravia (agustin.saravia@ingenieria.uner.edu.ar)
  *
