@@ -1,16 +1,19 @@
-/*! @mainpage Template
+/*! @mainpage EXAMEN FINAL - SARAVIA
  *
- * @section genDesc General Description
+ * @section General Description
  *
- * This section describes how the program works.
- *
- * <a href="https://drive.google.com/...">Operation Example</a>
+ * El programa utiliza un sensor HC_SR04 para medir distancia y así obtener el volumen de agua en un recipiente, 
+ * además por medio de una balanza analógica y un conversor ADC obtiene el peso de alimento de dicho recipiente. 
+ * También informa a travpes de UART el volumen de agua y el peso de alimento. Por último se enciende con la tecla 1
+ * y se indica con el LED_1. 
  *
  * @section hardConn Hardware Connection
  *
  * |    Peripheral  |   ESP32   	|
  * |:--------------:|:--------------|
- * | 	PIN_X	 	| 	GPIO_X		|
+ * |  HC-SR04 Trig  |    GPIO_3     |
+ * |  HC-SR04 Echo  |    GPIO_2     |
+ * |   ADC_x        |     CH0       |
  *
  *
  * @section changelog Changelog
@@ -26,17 +29,15 @@
 /*==================[inclusions]=============================================*/
 #include <stdio.h>
 #include <stdint.h>
-#include <stdio.h>
-#include <stdint.h>
 #include "hc_sr04.h"
 #include "led.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include <gpio_mcu.h>
-#include "timer_mcu.h"
 #include "uart_mcu.h"
 #include "analog_io_mcu.h"
 #include "gpio_mcu.h"
+#include "switch.h"
 /*==================[macros and definitions]=================================*/
 /**
  * @def DELAY_MEDIR
@@ -59,7 +60,11 @@ uint16_t DISTANCIA;
 /*! @brief Variable para almacenar el peso del alimento en gramos */
 uint16_t PESO_ALIMENTO;
 /*! @brief Variable para almacenar el volumen del agua en cm3 */
-uint16_t VOLUMEN_AGUA
+uint16_t VOLUMEN_AGUA;
+/*! @brief Variable donde se almacena el valor del conversor para el dispenser de alimento */
+uint16_t volt_analog;
+/*! @brief Variable de tipo bool para manejar el encendido y apagado del sistema */
+bool ON;
 
 /*! @brief Manejador de la tarea de medición de distancia */
 TaskHandle_t aguaYalimento_task_handle = NULL;
@@ -73,7 +78,10 @@ TaskHandle_t aguaYalimento_task_handle = NULL;
 static void tareaAguayAlimento(void *pvParameter){
 	while (true)
 	{
-		
+		if (ON == true)
+		{
+			LedOn(LED_1);
+
 			DISTANCIA = HcSr04ReadDistanceInCentimeters();
 
 			//Del volumen de un cilindro: 2*pi*r^2*altura despejo la altura mínima
@@ -92,12 +100,12 @@ static void tareaAguayAlimento(void *pvParameter){
 			if (DISTANCIA < h_min)
 			{
 				//Activo electrovalvula
-				GPIOOn(GPIO_Agua);
+				GPIOOn(GPIO_AGUA);
 			}
 			if (DISTANCIA > h_max)
 			{
 				//Apago electrovalvula
-				GPIOOff(GPIO_Agua);
+				GPIOOff(GPIO_AGUA);
 			}
 			
 			//Ahora para el alimento
@@ -106,15 +114,15 @@ static void tareaAguayAlimento(void *pvParameter){
 
 			//Conversion de mV a gramos
 
-			PESO_ALIMENTO = (volt_analog/*mV*/ * 1000/*gramos*/) / 3300//mV
+			PESO_ALIMENTO = (volt_analog/*mV*/ * 1000/*gramos*/) / 3300 ;//mV
 		
 			if (PESO_ALIMENTO < 50)
 			{
-				GPIOOn(GPIO_Alimento)
+				GPIOOn(GPIO_ALIMENTO);
 			}
 			if (PESO_ALIMENTO > 500)
 			{
-				GPIOOff(GPIO_Alimento)
+				GPIOOff(GPIO_ALIMENTO);
 			}
 
 			//Ahora la parte de UART
@@ -125,16 +133,26 @@ static void tareaAguayAlimento(void *pvParameter){
 			UartSendString(UART_PC, (char*)UartItoa(PESO_ALIMENTO, 10));
 			UartSendString(UART_PC, "gr");
 			UartSendString(UART_PC, "\r\n");
-
+		}
+		
 			vTaskDelay(DELAY_MEDIR / portTICK_PERIOD_MS);
 	}
 	
+}
+/**
+ * @fn void tecla1()
+ * @brief Función que alterna el estado del sistema (ON/OFF) al presionar la tecla 1.
+ */
+void tecla1(){
+	ON = !ON ;
 }
 /*==================[external functions definition]==========================*/
 void app_main(void){
 	HcSr04Init(GPIO_3, GPIO_2);
 	GPIOInit(GPIO_AGUA, GPIO_OUTPUT);
 	GPIOInit(GPIO_ALIMENTO, GPIO_OUTPUT);
+
+	SwitchActivInt(SWITCH_1, *tecla1, NULL);
 
 	//Configuracion del conversor para la balanza de alimento
 	analog_input_config_t convAD = {
@@ -152,6 +170,6 @@ void app_main(void){
 	};
 	UartInit(&mi_uart);
 
-	xTaskCreate(&tareaAguayAlimento, "Medir distancia y controlar agua", 2048, NULL, 5, &aguaYalimento_task_handle);
+	xTaskCreate(&tareaAguayAlimento, "Medir distancia, controlar agua, alimento y enviar por UART", 2048, NULL, 5, &aguaYalimento_task_handle);
 }
 /*==================[end of file]============================================*/
